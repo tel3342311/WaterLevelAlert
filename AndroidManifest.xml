@@ -22,6 +22,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".WaterAlertActivity"
+            android:label="@string/activity_water_alert" >
+        </activity>
+        <activity
+            android:name=".VideoActivity"
+            android:label="@string/activity_video" >
+        </activity>
+                <activity
+            android:name=".DataRecordActivity"
+            android:label="@string/activity_data_record" >
+        </activity>
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/activity_settings" >
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/activity_login" >
+        </activity>
+        
     </application>
 	
 </manifest>
