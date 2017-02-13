@@ -4,55 +4,76 @@
     android:layout_height="match_parent"
     tools:context="com.liteon.waterlevelalert.video" >
 
-	<ImageView 
-	   android:layout_width="match_parent"
-	   android:layout_height="match_parent"
-	   android:background="#FFFF0000"
-	   />
-	
-	<ImageView 
-	    android:id="@+id/icon"
-	    android:layout_width="226dp"
-	    android:layout_height="128dp"
-	    android:layout_alignParentBottom="true"
-	    android:layout_alignParentLeft="true"
-	    android:background="#FF00FF00"/>
-	<LinearLayout 
-	    android:orientation="horizontal"
+	<LinearLayout
+	    android:id="@+id/video_control"
+	    android:orientation="vertical"
 	    android:layout_width="match_parent"
-	    android:layout_height="128dp"
+	    android:layout_height="200dp"
 	    android:layout_alignParentBottom="true"
-	    android:layout_toRightOf="@id/icon">
-	    <ImageView
-		    android:id="@+id/home_btn" 
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF422442"/>
-	    <ImageView
-		    android:id="@+id/alert_btn" 
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF00F0F0"/>
-		<ImageView 
-		    android:id="@+id/video_btn"
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FFFFFF00"/>
-		<ImageView 
-		    android:id="@+id/data_btn"
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF0000FF"/>
-		<ImageView 
-		    android:id="@+id/setting_btn"
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF00FFFF"/>
-	  </LinearLayout>  
+	    android:background="#ffef9b21">
 
+	    <LinearLayout
+	        android:orientation="horizontal"
+	        android:layout_width="match_parent"
+	        android:layout_height="100dp">
+	        
+	        <TextView 
+	            android:id="@+id/start_progess"
+	            android:layout_width="0dp"
+	            android:layout_height="match_parent"
+	            android:layout_weight="1"
+	            android:text="00:00"/>
+
+	   		<ProgressBar 
+	   		    android:id="@+id/progress_bar"
+	   		    android:layout_weight="5.68"
+	   		    style="?android:attr/progressBarStyleHorizontal"
+	   		    android:layout_width="0dp"
+	   		    android:layout_height="match_parent"/>
+	   		<TextView 
+	            android:id="@+id/end_progess"
+	            android:layout_width="0dp"
+	           	android:layout_weight="1" 
+	            android:layout_height="match_parent"
+	            android:layout_gravity="right"
+	            android:text="99:99"/>
+	   		
+	   	</LinearLayout>
+	   	
+	    <RelativeLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent">
+	        <ImageView 
+	            android:id="@+id/volume"
+	            android:layout_width="100dp"
+	            android:layout_height="match_parent" 
+	            android:layout_alignParentLeft="true"
+	            android:background="#FFFF0000"/>
+	        <ImageView 
+	            android:id="@+id/play"
+	            android:layout_width="100dp"
+	            android:layout_height="match_parent" 
+	            android:layout_centerHorizontal="true"
+	            android:background="#FF00FF00"/>
+	        <ImageView 
+	            android:id="@+id/fullscreen"
+	            android:layout_width="100dp"
+	            android:layout_height="match_parent"
+	            android:background="#FF0000FF" 
+	            android:layout_alignParentRight="true"/>	    
+		</RelativeLayout>
+	</LinearLayout>
+	<LinearLayout 
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"	
+       android:layout_above="@id/video_control"
+       android:background="#FF000000">
+  
+       <VideoView 
+	       android:layout_gravity="center_vertical"
+		   android:layout_width="match_parent"
+		   android:layout_height="wrap_content"
+		   android:id="@+id/video_view"
+	   />
+	</LinearLayout>
 </RelativeLayout>
