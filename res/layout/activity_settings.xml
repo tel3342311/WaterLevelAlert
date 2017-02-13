@@ -4,55 +4,57 @@
     android:layout_height="match_parent"
     tools:context="com.liteon.waterlevelalert.SettingActivity" >
 
-	<ImageView 
-	   android:layout_width="match_parent"
-	   android:layout_height="match_parent"
-	   android:background="#FFFF0000"
-	   />
-	
-	<ImageView 
-	    android:id="@+id/icon"
-	    android:layout_width="226dp"
-	    android:layout_height="128dp"
-	    android:layout_alignParentBottom="true"
+	<TextView 
+	    android:id="@+id/title"
+	    android:layout_alignParentTop="true"
 	    android:layout_alignParentLeft="true"
-	    android:background="#FF00FF00"/>
-	<LinearLayout 
-	    android:orientation="horizontal"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+		android:text="NOTIFICATIONS"/>
+	<TextView 
+	    android:id="@+id/subtitle"
+	    android:layout_below="@id/title"
+	    android:layout_alignParentLeft="true"
+	  	android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:singleLine="false"
+	    android:text="Tap here to Manage app notifications.\n.*App notifications managed separately from proximity messages"/>
+	<RelativeLayout 
+	    android:id="@+id/login"
+	    android:layout_below="@id/subtitle"
 	    android:layout_width="match_parent"
-	    android:layout_height="128dp"
+	    android:layout_height="106dp"
+	    android:background="#FFFFFFFF">
+	    <TextView 
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_centerVertical="true"
+	        android:text="login"/>
+	    <ToggleButton 
+	        android:id="@+id/toggle_login"
+	        android:layout_width="165dp"
+	        android:layout_height="match_parent"
+	        android:layout_alignParentRight="true"/>
+	</RelativeLayout>
+	    
+	<TextView
+	    android:layout_below="@id/login"
+	    android:id="@+id/login_status"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:text="You are not logged."/>
+	<Button 
+	    android:id="@+id/skip"
+	    android:layout_width="match_parent"
+	    android:layout_height="100dp"
 	    android:layout_alignParentBottom="true"
-	    android:layout_toRightOf="@id/icon">
-	    <ImageView
-		    android:id="@+id/home_btn" 
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF422442"/>
-	    <ImageView
-		    android:id="@+id/alert_btn" 
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF00F0F0"/>
-		<ImageView 
-		    android:id="@+id/video_btn"
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FFFFFF00"/>
-		<ImageView 
-		    android:id="@+id/data_btn"
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF0000FF"/>
-		<ImageView 
-		    android:id="@+id/setting_btn"
-		    android:layout_width="128dp"
-		    android:layout_height="128dp"
-		    android:layout_weight="1"
-		    android:background="#FF00FFFF"/>
-	  </LinearLayout>  
-
+	    android:text="Skip"/>
+	<ImageView 
+	    android:layout_above="@id/skip"
+	    android:layout_centerHorizontal="true"
+	    android:layout_width="280dp"
+	    android:layout_height="187dp"
+	    android:background="#FFFF00FF"/> 
 </RelativeLayout>
