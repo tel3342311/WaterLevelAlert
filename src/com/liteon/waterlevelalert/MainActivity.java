@@ -1,5 +1,7 @@
 package com.liteon.waterlevelalert;
 
+import com.liteon.waterlevelalert.service.AlertDataService;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,7 +25,13 @@ public class MainActivity extends Activity {
 		findViews();
 		setListener();
 	}
-
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		startAlertService();
+	};
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -70,4 +78,25 @@ public class MainActivity extends Activity {
 			startActivity(intent);
 		}
 	};
+	
+	protected void onPause() {
+		super.onPause();
+		stopAlertService();
+	};
+	@Override
+	protected void onStop() {
+		super.onStop();
+		stopAlertService();
+	}
+	private void startAlertService(){
+		Intent intent = new Intent(MainActivity.this,
+                AlertDataService.class);
+        startService(intent);
+	}
+	
+	private void stopAlertService(){
+		Intent intent = new Intent(MainActivity.this,
+                AlertDataService.class);
+        stopService(intent);
+	}
 }

@@ -44,7 +44,9 @@
             android:name=".LoginActivity"
             android:label="@string/activity_login" >
         </activity>
-        
+        <service 
+            android:name=".service.AlertDataService"
+            android:stopWithTask="true"></service>
     </application>
 	
 </manifest>

@@ -16,7 +16,7 @@ import android.widget.ListView;
 
 public class DataRecordActivity extends Activity {
 
-	private ArrayList<DataRecord> mList;
+	private ArrayList<DataRecord> mList = new ArrayList<DataRecord>();
 	private ListView mListView;
 	private DataAdapter mAdapter;
 	@Override
@@ -25,7 +25,7 @@ public class DataRecordActivity extends Activity {
 		setContentView(R.layout.activity_data_record);
 		findView();
 		setupListView();
-		//new LoadingDataAsyncTask().execute(null);
+		new loadDataFromDB().execute(mList);
 	}
 	
 	private void findView() {
@@ -39,32 +39,12 @@ public class DataRecordActivity extends Activity {
 		mListView.setAdapter(mAdapter);
 	}
 	
-	private void insertData() {
-		AlertDataDBHelper alertDBHelper = new AlertDataDBHelper(this);
-		for (int i = 0; i < 100; i++) {
-			DataRecord item = new DataRecord();
-			item.setDate("2017/02/0" + (i%9+1) + " 9:00");
-			item.setPoleId("E222123");
-			if (i % 3 == 0) {
-				item.setStatus("Warning");
-			} else if (i % 3 == 1) {
-				item.setStatus("Secondary Alert");
-			} else {
-				item.setStatus("Three Alert");
-			}
-			
-			ContentValues values = new ContentValues();
-			values.put(AlertEntry.COLUMN_NAME_DATE, item.getDate());
-			values.put(AlertEntry.COLUMN_NAME_POLE_ID, item.getPoleId());
-			values.put(AlertEntry.COLUMN_NAME_ALERT_LEVEL, item.getStatus());
-			alertDBHelper.getWritableDatabase().insert(AlertEntry.TABLE_NAME, null, values);
+	private void getData(ArrayList<DataRecord> list) {
+		if (list == null) {
+			list = new ArrayList();
 		}
-	}
-	
-	private void getData() {
-	
-		mList = new ArrayList();
-		AlertDataDBHelper alertDBHelper = new AlertDataDBHelper(this);
+		list.clear();
+		AlertDataDBHelper alertDBHelper = AlertDataDBHelper.getInstance(getApplicationContext());
 		Cursor cursor = alertDBHelper.getReadableDatabase().rawQuery("SELECT * FROM " + AlertEntry.TABLE_NAME, null);
 		int row_num = cursor.getColumnCount();
 		cursor.moveToFirst();
@@ -76,27 +56,22 @@ public class DataRecordActivity extends Activity {
 			item.setDate(date);
 			item.setPoleId(pole_id);
 			item.setStatus(status);
-			mList.add(item);
+			list.add(item);
 		}
 	}
 	
-//	class LoadingDataAsyncTask extends AsyncTask<Void, Void, Void>{
-//	     @Override
-//	     protected void doInBackground(Void... param) {
-//	          getData();
-//	     }
-//	     @Override
-//	     protected void onPostExecute(Void... param) {
-//	          super.onPostExecute();
-//	          setupListView();
-//	     }
-//	     @Override
-//	     protected void onProgressUpdate(Void... param) {
-//	          super.onProgressUpdate();
-//	     }
-//	     @Override
-//	     protected void onPreExecute() {
-//	          super.onPreExecute();
-//	     }
-//	}
+	private class loadDataFromDB extends AsyncTask<ArrayList<DataRecord>, Integer, Long> {
+
+		@Override
+		protected Long doInBackground(ArrayList<DataRecord>... params) {
+			getData(params[0]);
+			return null;
+		}
+	
+		@Override
+		protected void onPostExecute(Long result) {
+			super.onPostExecute(result);
+			mAdapter.notifyDataSetChanged();
+		}
+	}
 }

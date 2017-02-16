@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class AlertDataDBHelper extends SQLiteOpenHelper {
 
+	private static AlertDataDBHelper mInstance = null;
 	public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "AlertData.db";
     private static final String TEXT_TYPE = " TEXT";
@@ -23,7 +24,14 @@ public class AlertDataDBHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES =
     	    "DROP TABLE IF EXISTS " + AlertEntry.TABLE_NAME;
     
-    public AlertDataDBHelper(Context context) {
+    public static AlertDataDBHelper getInstance(Context ctx) {
+        if (mInstance == null) {
+            mInstance = new AlertDataDBHelper(ctx.getApplicationContext());
+        }
+        return mInstance;
+    }
+    
+    private AlertDataDBHelper(Context context) {
     	super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 	@Override
