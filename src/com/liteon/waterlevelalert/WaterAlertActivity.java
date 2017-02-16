@@ -42,7 +42,7 @@ public class WaterAlertActivity extends Activity {
 		        DataInputStream dataInputStream = new DataInputStream(socket.getInputStream());
 		        Log.d("socket", "socket connected : " + socket.isConnected());
 		        while (socket.isConnected()) {
-		        	byte [] data = {0x01, 0x01};
+		        	byte [] data = { 0x00, 0x01, 0x00, 0x00, 0x00, 0x06, 0x01, 0x01, 0x00, 0x01, 0x00, 0x04};
 		        	dataOutputStream.write(data);
 		        	
 		        	int count = dataInputStream.available();
@@ -80,28 +80,4 @@ public class WaterAlertActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
-	
-	public static int getCRC(byte[] buf, int len ) {
-	    int crc =  0xFFFF;
-	    int val = 0;
-
-	      for (int pos = 0; pos < len; pos++) {
-	        crc ^= (int)(0x00ff & buf[pos]);  // FIX HERE -- XOR byte into least sig. byte of crc
-
-	        for (int i = 8; i != 0; i--) {    // Loop over each bit
-	          if ((crc & 0x0001) != 0) {      // If the LSB is set
-	            crc >>= 1;                    // Shift right and XOR 0xA001
-	            crc ^= 0xA001;
-	          }
-	          else                            // Else LSB is not set
-	            crc >>= 1;                    // Just shift right
-	        }
-	      }
-	    // Note, crc has low and high bytes swapped, so use it accordingly (or swap bytes)
-	    val =  (crc & 0xff) << 8;
-	    val =  val + ((crc >> 8) & 0xff);
-	    System.out.printf("Calculated a CRC of 0x%x, swapped: 0x%x\n", crc, val);
-	    return val;  
-
-	} 
 }
