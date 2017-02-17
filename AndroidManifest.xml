@@ -47,6 +47,10 @@
         <service 
             android:name=".service.AlertDataService"
             android:stopWithTask="true"></service>
+        <provider 
+            android:name=".util.AlertDataContentProvider"
+            android:authorities="com.liteon.waterlevelalert"
+            ></provider>
     </application>
 	
 </manifest>

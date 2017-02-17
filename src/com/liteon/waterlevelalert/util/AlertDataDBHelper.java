@@ -11,6 +11,7 @@ public class AlertDataDBHelper extends SQLiteOpenHelper {
 	private static AlertDataDBHelper mInstance = null;
 	public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "AlertData.db";
+    public static final String SQL_QUERY_ALL_DATA = "SELECT * FROM " + AlertEntry.TABLE_NAME;
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
@@ -20,6 +21,7 @@ public class AlertDataDBHelper extends SQLiteOpenHelper {
     	    AlertEntry.COLUMN_NAME_POLE_ID + TEXT_TYPE + COMMA_SEP +
     	    AlertEntry.COLUMN_NAME_ALERT_LEVEL + TEXT_TYPE +
     	    " )";
+    
     
     private static final String SQL_DELETE_ENTRIES =
     	    "DROP TABLE IF EXISTS " + AlertEntry.TABLE_NAME;

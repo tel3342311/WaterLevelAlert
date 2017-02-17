@@ -44,19 +44,18 @@ public class DataRecordActivity extends Activity {
 			list = new ArrayList();
 		}
 		list.clear();
-		AlertDataDBHelper alertDBHelper = AlertDataDBHelper.getInstance(getApplicationContext());
-		Cursor cursor = alertDBHelper.getReadableDatabase().rawQuery("SELECT * FROM " + AlertEntry.TABLE_NAME, null);
-		int row_num = cursor.getColumnCount();
-		cursor.moveToFirst();
-		for (int i = 0; i < row_num; i++) {
-			DataRecord item = new DataRecord();
-			String date = cursor.getString(cursor.getColumnIndex(AlertEntry.COLUMN_NAME_DATE));
-			String pole_id = cursor.getString(cursor.getColumnIndex(AlertEntry.COLUMN_NAME_POLE_ID));
-			String status = cursor.getString(cursor.getColumnIndex(AlertEntry.COLUMN_NAME_ALERT_LEVEL));
-			item.setDate(date);
-			item.setPoleId(pole_id);
-			item.setStatus(status);
-			list.add(item);
+		Cursor cursor = getContentResolver().query(AlertEntry.CONTENT_URI, null,null, null, null);
+		if (cursor.getColumnCount() > 0) {
+			while (cursor.moveToNext()) {
+				DataRecord item = new DataRecord();
+				String date = cursor.getString(cursor.getColumnIndex(AlertEntry.COLUMN_NAME_DATE));
+				String pole_id = cursor.getString(cursor.getColumnIndex(AlertEntry.COLUMN_NAME_POLE_ID));
+				String status = cursor.getString(cursor.getColumnIndex(AlertEntry.COLUMN_NAME_ALERT_LEVEL));
+				item.setDate(date);
+				item.setPoleId(pole_id);
+				item.setStatus(status);
+				list.add(item);
+			}
 		}
 	}
 	
@@ -72,6 +71,7 @@ public class DataRecordActivity extends Activity {
 		protected void onPostExecute(Long result) {
 			super.onPostExecute(result);
 			mAdapter.notifyDataSetChanged();
+			mListView.invalidate();
 		}
 	}
 }

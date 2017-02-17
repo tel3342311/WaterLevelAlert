@@ -89,16 +89,10 @@ public class AlertDataService extends Service {
 				dataInputStream = new DataInputStream(mSocket.getInputStream());
 		        while (isEnable) {
 					Log.d(TAG, "run() isEnable : " + isEnable);
-		        	dataOutputStream.write(request_data);
-		        	
+		        	dataOutputStream.write(request_data);	        	
 		        	int count = dataInputStream.available();
-		            
-		            // create buffer
 		            byte[] bs = new byte[count];
-		            
-		            // read data into buffer
 		            dataInputStream.read(bs);
-		            
 		            Log.d(TAG, "byte count " + count);
 		            int TCP_HEADER_SIZE = 6; 
 		            if ( count > TCP_HEADER_SIZE) {
@@ -167,16 +161,13 @@ public class AlertDataService extends Service {
 		}
 		
 		private void insertDataToDB(int waterLevel) {
-			
-			SQLiteDatabase db = AlertDataDBHelper.getInstance(getApplicationContext()).getWritableDatabase();
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			String date = sdFormat.format(new Date());
 			ContentValues cv = new ContentValues();
 			cv.put(AlertEntry.COLUMN_NAME_DATE, date);
-			cv.put(AlertEntry.COLUMN_NAME_POLE_ID, "E222123");
+			cv.put(AlertEntry.COLUMN_NAME_POLE_ID, "E"+new Date().getTime());
 			cv.put(AlertEntry.COLUMN_NAME_ALERT_LEVEL, getLevelString(waterLevel));
-			long num = db.insert(AlertEntry.TABLE_NAME, null, cv);
-			db.close();
+			getContentResolver().insert(AlertEntry.CONTENT_URI, cv);
 		}
 		
 		private String getLevelString(int value) {
