@@ -7,9 +7,44 @@
 	<ImageView 
 	   android:layout_width="match_parent"
 	   android:layout_height="match_parent"
-	   android:background="#FFFF0000"
+	   android:background="#FFFFFFFF"
 	   />
 
+	<FrameLayout
+	    android:id="@+id/alert_frame"
+	   	android:layout_width="386dp"
+	    android:layout_height="388dp"
+	    android:layout_centerInParent="true">
+	   <ImageView
+	       	android:id="@+id/warning" 
+	   		android:layout_width="match_parent"
+	   		android:layout_height="match_parent"
+	   		android:background="#FFFF0000"
+	   		android:visibility="invisible"
+	   />
+	   <ImageView 
+	        android:id="@+id/secondary_alert"
+	   		android:layout_width="match_parent"
+	   		android:layout_height="match_parent"
+	   		android:background="#FF00FF00"
+	   		android:visibility="invisible"
+	   />
+	   <ImageView 
+	       	android:id="@+id/thirdary_alert"
+	   		android:layout_width="match_parent"
+	   		android:layout_height="match_parent"
+	   		android:background="#FF0000FF"
+	   		android:visibility="invisible"
+	   />
+	</FrameLayout>
+	<TextView 
+	    android:id="@+id/alert_status"
+	    android:layout_below="@id/alert_frame"
+	    android:textSize="36sp"
+	    android:layout_centerHorizontal="true"
+	    android:layout_width="410dp"
+	    android:layout_height="50dp"/>
+	
 	<LinearLayout 
 	    android:id="@+id/gps"
 	    android:orientation="horizontal"
