@@ -6,19 +6,15 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.liteon.waterlevelalert.util.AlertDataDBHelper;
 import com.liteon.waterlevelalert.util.AlertTable.AlertEntry;
+import com.liteon.waterlevelalert.util.SocketConnection;
 
 import android.app.Service;
 import android.content.ContentValues;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
-import android.hardware.Camera.Size;
-import android.net.wifi.WifiConfiguration.Status;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -55,7 +51,8 @@ public class AlertDataService extends Service {
 	}
 	
 	private class DataThread extends Thread {
-		
+
+		private SocketConnection mConnection;
 		private Socket mSocket;
 		private String serverIpAddress = "192.168.0.200";
 		private static final int server_port = 502;
@@ -63,6 +60,11 @@ public class AlertDataService extends Service {
 		private InetAddress serverAddr;
 		private DataOutputStream dataOutputStream;
 		private DataInputStream dataInputStream; 
+		
+		public DataThread() {
+			mConnection = new SocketConnection(serverIpAddress, server_port);
+		}
+		
 		@Override
 		public void run() {
 			super.run();
@@ -80,87 +82,35 @@ public class AlertDataService extends Service {
         			0x00,
         			0x04
         			};
-        	
-			try {
-				Log.d(TAG, "run() start");
-				openConnection();
-				
-				dataOutputStream = new DataOutputStream(mSocket.getOutputStream());
-				dataInputStream = new DataInputStream(mSocket.getInputStream());
-		        while (isEnable) {
-					Log.d(TAG, "run() isEnable : " + isEnable);
-		        	dataOutputStream.write(request_data);	        	
-		        	int count = dataInputStream.available();
-		            byte[] bs = new byte[count];
-		            dataInputStream.read(bs);
-		            Log.d(TAG, "byte count " + count);
-		            int TCP_HEADER_SIZE = 6; 
-		            if ( count > TCP_HEADER_SIZE) {
-			            int data_size = bs[TCP_HEADER_SIZE - 1];
-			            int value = bs[TCP_HEADER_SIZE + data_size -1];
-			            int new_status = value;
-			            Log.d(TAG, "current status is " + getLevelString(currentStatus));
-			            Log.d(TAG, "new status is " + getLevelString(new_status));
-			            if (new_status != currentStatus) {
-			            	if (new_status != normal) {
-			            		insertDataToDB(new_status);
-			            	}
-			            	currentStatus = new_status;
-			            }
-		            }
-			        Thread.sleep(2000);
-		        }
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			} finally {
-				closeConnection();
-			}			
+        	while(true) {
+	            try {
+					Thread.sleep(3000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				mConnection.connect();
+				if (mConnection.isBroken()) {
+					continue;
+				}
+				mConnection.sendCommand(request_data);
+				int new_status = mConnection.getReply();
+				Log.d(TAG, "new status is " + getLevelString(new_status) +", current status is " + getLevelString(currentStatus));
+	            if (new_status != currentStatus) {
+	            	if (new_status != normal) {
+	            		insertDataToDB(new_status);
+	            	}
+	            	currentStatus = new_status;
+	            }
+
+        	}
 		}
 		
-		public void openConnection() {
-			try {
-				serverAddr = InetAddress.getByName(serverIpAddress);
-				mSocket = new Socket(serverAddr, server_port);
-			} catch (UnknownHostException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			if (mSocket != null) {
-				isEnable = (!mSocket.isClosed() && mSocket.isConnected());
-			} else { 
-				isEnable = false;
-			}
-			Log.d(TAG, "open connection: isEnable = " + isEnable);
-		} 
 		
-		public void closeConnection() {
-			isEnable = false;
-			try {
-				if (dataOutputStream != null) {
-					dataOutputStream.close();
-				}
-				if (dataInputStream != null) {
-					dataInputStream.close();
-				}
-				if (mSocket != null) {
-					mSocket.close();
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			Log.d(TAG, "close connection: isEnable = " + isEnable);
-		}
-		
-		public boolean isEnable() {
-			return isEnable;
-		}
 		
 		private void insertDataToDB(int waterLevel) {
+			if (getLevelString(waterLevel).isEmpty()) {
+				return;
+			}
 			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 			String date = sdFormat.format(new Date());
 			ContentValues cv = new ContentValues();
@@ -183,16 +133,8 @@ public class AlertDataService extends Service {
 			return "";
 		}
 		
-		@Override
-		protected void finalize() throws Throwable {
-			try{
-				if (mSocket != null)
-				mSocket.close();
-		    } catch (IOException e) {
-		        System.out.println("Could not close socket");
-		        System.exit(-1);
-		    }
-			super.finalize();
+		public void closeConnection() {
+			mConnection.disconnect();
 		}
 	}
 }
