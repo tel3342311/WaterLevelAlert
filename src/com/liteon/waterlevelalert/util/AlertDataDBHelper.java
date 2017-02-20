@@ -12,6 +12,7 @@ public class AlertDataDBHelper extends SQLiteOpenHelper {
 	public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "AlertData.db";
     public static final String SQL_QUERY_ALL_DATA = "SELECT * FROM " + AlertEntry.TABLE_NAME;
+    public static final String SQL_QUERY_DATA_BY_ID = "SELECT * FROM " + AlertEntry.TABLE_NAME + " WHERE _id = ?";
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =

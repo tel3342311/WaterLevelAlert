@@ -14,13 +14,13 @@ import android.util.Log;
 public class AlertDataContentProvider extends ContentProvider {
 
 	private static final String TAG = AlertDataContentProvider.class.getName();
-	private static final String AUTHORITY = "com.liteon.waterlevelalert";
+	
 	private static final UriMatcher mUriMatcher;
-	private static final int URI_ALERT_DATAS = 2;
 	private static AlertDataDBHelper mAlertDBHelper;
 	static {
 		mUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-		mUriMatcher.addURI(AUTHORITY, AlertEntry.PATH_MULTIPLE, URI_ALERT_DATAS);
+		mUriMatcher.addURI(Def.AUTHORITY, AlertEntry.PATH_SINGLE, Def.URI_ALERT_DATA_ID);
+		mUriMatcher.addURI(Def.AUTHORITY, AlertEntry.PATH_MULTIPLE, Def.URI_ALERT_DATAS);
 	}
 	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
@@ -54,10 +54,18 @@ public class AlertDataContentProvider extends ContentProvider {
 		Cursor cursor = null;
 		SQLiteDatabase mDB = null;
 		switch(mUriMatcher.match(uri)) {
-			case URI_ALERT_DATAS:
+			case Def.URI_ALERT_DATAS:
 				mDB = mAlertDBHelper.getWritableDatabase();
 				cursor = mDB.rawQuery(AlertDataDBHelper.SQL_QUERY_ALL_DATA, null);
 				cursor.moveToFirst();
+				break;
+			case Def.URI_ALERT_DATA_ID:
+				mDB = mAlertDBHelper.getWritableDatabase();
+				String[] whereArgs = new String[] {""};
+				whereArgs[0] = uri.getLastPathSegment();
+				cursor = mDB.rawQuery(AlertDataDBHelper.SQL_QUERY_DATA_BY_ID, whereArgs);
+				cursor.moveToFirst();
+				break;
 		}
 		return cursor;
 	}

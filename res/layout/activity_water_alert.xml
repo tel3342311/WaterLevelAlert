@@ -55,7 +55,7 @@
 	    <TextView 
 	        android:layout_width="221dp"
 	        android:layout_height="64dp"
-	        android:text="GPS:"
+	        android:text="@string/gps"
 	        android:textAlignment="center"/>
 	    <TextView 
 	        android:id="@+id/gps_data"
@@ -82,7 +82,7 @@
 	    <TextView 
 	        android:layout_width="221dp"
 	        android:layout_height="64dp"
-	        android:text="Pole ID:"
+	        android:text="@string/pole_id"
 	        android:textAlignment="center"/>
 	    <TextView 
 	      	android:id="@+id/pole_id"

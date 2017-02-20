@@ -69,6 +69,7 @@ public class SocketConnection implements Closeable {
 				socket.setSoTimeout(soTimeout);
 				outputStream = new DataOutputStream(socket.getOutputStream());
 				inputStream = new DataInputStream(socket.getInputStream());
+				broken = false;
 			} catch (IOException ex) {
 				broken = true;
 				ex.printStackTrace();
@@ -144,13 +145,15 @@ public class SocketConnection implements Closeable {
 	public int readWithCheckingBroken() {
 		int new_status = -1;
 		try {
-			int count = inputStream.available();
-            byte[] bs = new byte[count];
-            inputStream.read(bs);
-            int TCP_HEADER_SIZE = 6; 
+			byte[] buffer = new byte[1024];
+			int count = 0;
+			do{
+				count = inputStream.read(buffer);
+			} while(count == 0);
+			int TCP_HEADER_SIZE = 6; 
             if ( count > TCP_HEADER_SIZE) {
-	            int data_size = bs[TCP_HEADER_SIZE - 1];
-	            int value = bs[TCP_HEADER_SIZE + data_size -1];
+	            int data_size = buffer[TCP_HEADER_SIZE - 1];
+	            int value = buffer[TCP_HEADER_SIZE + data_size -1];
 	            new_status = value;
             }
 		} catch (IOException exc) {

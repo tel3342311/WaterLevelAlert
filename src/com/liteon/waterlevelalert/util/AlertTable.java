@@ -10,6 +10,7 @@ public class AlertTable {
 	
 	public static abstract class AlertEntry implements BaseColumns {
 		public static final String PATH_MULTIPLE = "objs"; 
+		public static final String PATH_SINGLE = "objs/#"; 
 		public static final String TABLE_NAME = "alert_entry";
 		public static final Uri CONTENT_URI  = Uri.parse("content://" + AUTHORITY + "/" + PATH_MULTIPLE);
         public static final String COLUMN_NAME_DATE = "date";

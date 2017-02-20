@@ -1,5 +1,8 @@
 package com.liteon.waterlevelalert;
 
+import com.liteon.waterlevelalert.service.AlertDataService;
+import com.liteon.waterlevelalert.util.Def;
+
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -22,19 +25,19 @@ public class WaterAlertActivity extends Activity {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			
-			String level = intent.getStringExtra("level");
+			String level = intent.getStringExtra(Def.LEVEL);
 			mTextView.setText("");
 			mWarning.setVisibility(View.INVISIBLE);
 			mSecondary.setVisibility(View.INVISIBLE);
 			mThirdary.setVisibility(View.INVISIBLE);
-			if (level.equals("Warning")) {
-				mTextView.setText("WARNING!");
+			if (level.equals(Def.WARNING_ALERT)) {
+				mTextView.setText(R.string.warning);
 				mWarning.setVisibility(View.VISIBLE);
-			} else if (level.equals("Secondary Alert")) {
-				mTextView.setText("Secondary Alert");
+			} else if (level.equals(Def.SECONDARY_ALERT)) {
+				mTextView.setText(R.string.secondary_alert);
 				mSecondary.setVisibility(View.VISIBLE);
-			} else if (level.equals("Thirdary Alert")) {
-				mTextView.setText("Thirdary Alert");
+			} else if (level.equals(Def.THIRDARY_ALERT)) {
+				mTextView.setText(R.string.thirdary_alert);
 				mThirdary.setVisibility(View.VISIBLE);
 			}
 		}
@@ -57,9 +60,11 @@ public class WaterAlertActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		String BROADCAST_ACTION = "com.liteon.waterlevelalert.alertevent";
-		IntentFilter intentFilter = new IntentFilter(BROADCAST_ACTION);
+		IntentFilter intentFilter = new IntentFilter(Def.BROADCAST_ACTION);
 		registerReceiver(mBroadcastReceiver, intentFilter);
+		Intent intent = new Intent(this, AlertDataService.class);
+		intent.setAction(Def.BROADCAST_ACTION_GET_LEVEL);
+		startService(intent);
 	}
 	
 	@Override

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.liteon.waterlevelalert.util.AlertTable.AlertEntry;
+import com.liteon.waterlevelalert.util.Def;
 import com.liteon.waterlevelalert.util.SocketConnection;
 
 import android.app.Service;
@@ -26,11 +27,10 @@ public class AlertDataService extends Service {
 	private int secondaryLevel = 2;
 	private int thirdLevel = 4;
 	private int normal = 0;
-	public static final String BROADCAST_ACTION = "com.liteon.waterlevelalert.alertevent";
 	private Intent intent;
 	
 	public void onCreate() {
-		intent = new Intent(BROADCAST_ACTION);
+		intent = new Intent(Def.BROADCAST_ACTION);
 	};
 	
 	@Override
@@ -38,6 +38,10 @@ public class AlertDataService extends Service {
 		if (mConnectThread == null) {
 			mConnectThread = new DataThread();
 			mConnectThread.start();
+		}
+		String action = intent.getAction();
+		if (action != null && action.equals(Def.BROADCAST_ACTION_GET_LEVEL)){
+			sendAlert(null, getLevelString(currentStatus));
 		}
 		Log.d(TAG, "onStartCommand");
 		return 0;
@@ -55,13 +59,41 @@ public class AlertDataService extends Service {
 		mConnectThread = null;
 		
 	}
+	private Uri insertDataToDB(String waterLevel) {
+		SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+		String date = sdFormat.format(new Date());
+		ContentValues cv = new ContentValues();
+		cv.put(AlertEntry.COLUMN_NAME_DATE, date);
+		cv.put(AlertEntry.COLUMN_NAME_POLE_ID, "E"+new Date().getTime());
+		cv.put(AlertEntry.COLUMN_NAME_ALERT_LEVEL, waterLevel);
+		return getContentResolver().insert(AlertEntry.CONTENT_URI, cv);
+	}
+	
+	private String getLevelString(int value) {
+		if ((value & warningStatus) > 0) {
+			return Def.WARNING_ALERT;
+		} else if ((value & secondaryLevel) > 0) {
+			return Def.SECONDARY_ALERT;
+		} else if ((value & thirdLevel) > 0) {
+			return Def.THIRDARY_ALERT;
+		} else if (value == normal) {
+			return Def.NORMAL;
+		}
+		return "";
+	}
+	
+	private void sendAlert(Uri data, String waterlevel) {
+		intent.putExtra(Def.LEVEL, waterlevel);
+		intent.putExtra(Def.NEW_ALERT_DATA_URI, data);
+		sendBroadcast(intent);
+	}
 	
 	private class DataThread extends Thread {
 
 		private SocketConnection mConnection;
 		private Socket mSocket;
-		private String serverIpAddress = "192.168.0.200";
-		private static final int server_port = 502;
+		private String serverIpAddress = Def.URL;
+		private static final int server_port = Def.PORT;
 		boolean isEnable = false;
 		private InetAddress serverAddr;
 		private DataOutputStream dataOutputStream;
@@ -74,20 +106,7 @@ public class AlertDataService extends Service {
 		@Override
 		public void run() {
 			super.run();
-        	byte [] request_data = { 
-        			//TCP HEADER -- 6 bytes
-        			0x00, 0x01, 0x00, 0x00, 0x00, 0x06,
-        			//Device ID -- 1 bytes
-        			0x01,
-        			//Function Code -- 1 bytes
-        			0x01,
-        			//Start Address -- 2 bytes
-        			0x00,
-        			0x01,
-        			//No. of Register -- 2 bytes
-        			0x00,
-        			0x04
-        			};
+        	
         	while(true) {
 	            try {
 					Thread.sleep(3000);
@@ -98,7 +117,7 @@ public class AlertDataService extends Service {
 				if (mConnection.isBroken()) {
 					continue;
 				}
-				mConnection.sendCommand(request_data);
+				mConnection.sendCommand(Def.MODBUS_REQUEST_DATA);
 				int new_status = mConnection.getReply();
 				if (new_status == -1) {
 					Log.e(TAG, "Error reply");
@@ -119,38 +138,9 @@ public class AlertDataService extends Service {
 
         	}
 		}
-		
-		private Uri insertDataToDB(String waterLevel) {
-			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-			String date = sdFormat.format(new Date());
-			ContentValues cv = new ContentValues();
-			cv.put(AlertEntry.COLUMN_NAME_DATE, date);
-			cv.put(AlertEntry.COLUMN_NAME_POLE_ID, "E"+new Date().getTime());
-			cv.put(AlertEntry.COLUMN_NAME_ALERT_LEVEL, waterLevel);
-			return getContentResolver().insert(AlertEntry.CONTENT_URI, cv);
-		}
-		
-		private String getLevelString(int value) {
-			if ((value & warningStatus) > 0) {
-				return "Warning";
-			} else if ((value & secondaryLevel) > 0) {
-				return "Secondary Alert";
-			} else if ((value & thirdLevel) > 0) {
-				return "Thirdary Alert";
-			} else if (value == normal) {
-				return "normal";
-			}
-			return "";
-		}
-		
+	
 		public void closeConnection() {
 			mConnection.disconnect();
-		}
-		
-		public void sendAlert(Uri data, String waterlevel) {
-			intent.putExtra("level", waterlevel);
-			intent.putExtra("id", data);
-			sendBroadcast(intent);
 		}
 	}
 }
