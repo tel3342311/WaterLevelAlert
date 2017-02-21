@@ -7,12 +7,17 @@
 	<ImageView 
 	   android:layout_width="match_parent"
 	   android:layout_height="match_parent"
-	   android:background="#FFFFFFFF"
-	   />
+	   android:background="@drawable/alert_gnd"/>
 
+	<ImageView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_marginTop="@dimen/activity_title_bar_height"
+	    android:layout_marginBottom="@dimen/activity_alert_bottom_height"
+	    android:background="@drawable/water0alert_gnd_mapgps"/>
 	<FrameLayout
 	    android:id="@+id/alert_frame"
-	   	android:layout_width="386dp"
+	   	android:layout_width="match_parent"
 	    android:layout_height="388dp"
 	    android:layout_centerInParent="true">
 	   <ImageView
@@ -44,52 +49,32 @@
 	    android:layout_centerHorizontal="true"
 	    android:layout_width="410dp"
 	    android:layout_height="50dp"/>
-	
-	<LinearLayout 
-	    android:id="@+id/gps"
-	    android:orientation="horizontal"
-	    android:layout_width="match_parent"
-	    android:layout_height="64dp"
-	    android:layout_alignParentBottom="true"
-	    android:background="#FFF09825">
-	    <TextView 
-	        android:layout_width="221dp"
-	        android:layout_height="64dp"
-	        android:text="@string/gps"
-	        android:textAlignment="center"/>
-	    <TextView 
-	        android:id="@+id/gps_data"
-	        android:layout_width="221dp"
-	        android:layout_height="64dp"
-	        android:text="47.1312435 ; 2.141413213"
-	        android:textAlignment="viewStart"
-	        android:layout_gravity="start"/>
-	  </LinearLayout>  
 
-	<ImageView
-	    android:id="@+id/line"
+	<LinearLayout 
 	    android:layout_width="match_parent"
-	    android:layout_height="1px"
-	    android:layout_above="@id/gps"
-	    android:background="#FFFFFFFF"/>
-		
-		<LinearLayout 
-	    android:orientation="horizontal"
-	    android:layout_width="match_parent"
-	    android:layout_height="64dp"
-	    android:layout_above="@id/line"
-	    android:background="#FFF09825">
-	    <TextView 
-	        android:layout_width="221dp"
-	        android:layout_height="64dp"
-	        android:text="@string/pole_id"
-	        android:textAlignment="center"/>
-	    <TextView 
-	      	android:id="@+id/pole_id"
-	        android:layout_width="221dp"
-	        android:layout_height="64dp"
-	        android:text="E222123"
-	        android:textAlignment="viewStart"
-	        android:layout_gravity="start"/>
-	  </LinearLayout>
+	    android:layout_height="@dimen/activity_alert_bottom_height"
+	    android:orientation="vertical"
+	    android:layout_alignParentBottom="true"
+	    android:layout_marginLeft="@dimen/activity_alert_text_left_margin">
+	   <TextView 
+	        android:id="@+id/gps_data"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:textSize="@dimen/activity_alert_text_size"
+	        android:gravity="center_vertical"
+	        android:textColor="#FFFFFFFF"
+	        android:text="47.1312435 ; 2.141413213"/>
+	  
+	  <TextView
+	      android:id="@+id/pole_id"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:textSize="@dimen/activity_alert_text_size"
+	        android:gravity="center_vertical"
+	        android:text="E123231"
+	      	android:textColor="#FFFFFFFF" />
+	</LinearLayout>
+	  
 </RelativeLayout>
