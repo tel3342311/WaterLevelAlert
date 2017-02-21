@@ -86,6 +86,7 @@ public class AlertDataService extends Service {
 		intent.putExtra(Def.LEVEL, waterlevel);
 		intent.putExtra(Def.NEW_ALERT_DATA_URI, data);
 		sendBroadcast(intent);
+		Log.d(TAG, "sendAlert Uri : " + data + ", alert is " + waterlevel);
 	}
 	
 	private class DataThread extends Thread {
