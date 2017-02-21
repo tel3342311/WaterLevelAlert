@@ -13,6 +13,7 @@
 	<dimen name="activity_alert_text_bottom_margin">30dp</dimen>
 	<dimen name="activity_alert_text_height">190dp</dimen>
 	<dimen name="activity_alert_text_size">32dp</dimen>
+	<dimen name="activity_datareocrd_title_bar_height">158dp</dimen>
 	
 	
 </resources>

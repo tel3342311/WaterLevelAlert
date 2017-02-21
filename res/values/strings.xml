@@ -12,8 +12,8 @@
 	<string name="warning">WARNING!</string>
 	<string name="secondary_alert">SECONDARY ALERT</string>
 	<string name="thirdary_alert">THIRDARY ALERT</string>
-	<string name="pole_id">POLE ID:</string>
-	<string name="gps">GPS:</string>
+	<string name="pole_id">Pole ID</string>
+	<string name="gps">GPS</string>
 	<string name="date">Date</string>
 	<string name="status">Status</string>
 </resources>
