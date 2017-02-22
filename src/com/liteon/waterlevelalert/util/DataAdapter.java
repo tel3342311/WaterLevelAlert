@@ -60,13 +60,12 @@ public class DataAdapter extends BaseAdapter {
 	}
 	
 	private void setIconByStatus(ImageView imageView, String status) {
-		//TODO update status icon 
-		if (status.equals("Warning")) {
-			imageView.setBackgroundColor(0xFFFF0000);
-		} else if (status.equals("Secondary Alert")) {
-			imageView.setBackgroundColor(0xFF00FF00);
+		if (status.equals(Def.WARNING_ALERT)) {
+			imageView.setBackgroundResource(R.drawable.datarecord_img_warning);
+		} else if (status.equals(Def.SECONDARY_ALERT)) {
+			imageView.setBackgroundResource(R.drawable.datarecord_img_secondary);
 		} else {
-			imageView.setBackgroundColor(0xFF0000FF);
+			imageView.setBackgroundResource(R.drawable.datarecord_img_three);
 		}
 	}
 
