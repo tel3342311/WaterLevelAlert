@@ -23,7 +23,7 @@ public class VideoActivity extends Activity{
 	}
 	
 	private void setupVideoView() {
-		Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.samplevideo);
+		Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.rtrs);
 		mVideoView.setVideoURI(uri);
 		mVideoView.start();
 	}

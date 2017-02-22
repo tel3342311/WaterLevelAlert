@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">  
+    <item android:drawable="@drawable/water0alert_img_monitoring1" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring2" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring3" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring4" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring5" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring6" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring7" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring8" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring9" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring10" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring11" android:duration="33"></item>  
+    <item android:drawable="@drawable/water0alert_img_monitoring12" android:duration="33"></item>  
+</animation-list>

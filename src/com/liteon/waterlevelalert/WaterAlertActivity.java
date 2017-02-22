@@ -8,37 +8,46 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class WaterAlertActivity extends Activity {
 	
-	TextView mTextView;
+	ImageView mMonitoring;
 	ImageView mWarning;
 	ImageView mSecondary;
 	ImageView mThirdary;
-	
+	ImageView mMap;
+	Animation warningAnimation; 
+	Animation secondaryAnimation;
+	AnimationDrawable montioringAnimation;
+
 	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			
 			String level = intent.getStringExtra(Def.LEVEL);
-			mTextView.setText("");
-			mWarning.setVisibility(View.INVISIBLE);
-			mSecondary.setVisibility(View.INVISIBLE);
+			mWarning.clearAnimation();
+			mSecondary.clearAnimation();
+			montioringAnimation.stop();
 			mThirdary.setVisibility(View.INVISIBLE);
 			if (level.equals(Def.WARNING_ALERT)) {
-				mTextView.setText(R.string.warning);
-				mWarning.setVisibility(View.VISIBLE);
+				startAnimation(mWarning, warningAnimation);
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_warning);
 			} else if (level.equals(Def.SECONDARY_ALERT)) {
-				mTextView.setText(R.string.secondary_alert);
-				mSecondary.setVisibility(View.VISIBLE);
+				startAnimation(mSecondary, secondaryAnimation);
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_secondary);
 			} else if (level.equals(Def.THIRDARY_ALERT)) {
-				mTextView.setText(R.string.thirdary_alert);
 				mThirdary.setVisibility(View.VISIBLE);
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_third);
+			} else {
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_mapgps);
+				startAnimation(mMonitoring, montioringAnimation);
 			}
 		}
 		
@@ -49,13 +58,16 @@ public class WaterAlertActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_water_alert);
 		findViews();
+		setupAnimation();
+		mMonitoring.setVisibility(View.VISIBLE);
 	}
 	
 	private void findViews() {
-		mTextView = (TextView) findViewById(R.id.alert_status);
 		mWarning = (ImageView) findViewById(R.id.warning);
 		mSecondary = (ImageView) findViewById(R.id.secondary_alert);
 		mThirdary = (ImageView) findViewById(R.id.thirdary_alert);
+		mMap = (ImageView) findViewById(R.id.map_bg);
+		mMonitoring = (ImageView) findViewById(R.id.monitoring_alert);
 	}
 	@Override
 	protected void onResume() {
@@ -71,5 +83,19 @@ public class WaterAlertActivity extends Activity {
 	protected void onPause() {
 		super.onPause();
 		unregisterReceiver(mBroadcastReceiver);
+	}
+	
+	private void startAnimation(ImageView view, Animation animation){		
+		view.setAnimation(animation);
+	}
+	
+	private void startAnimation(ImageView view, AnimationDrawable animationDrawable) {
+		montioringAnimation.start();
+	}
+	
+	private void setupAnimation(){
+		warningAnimation = AnimationUtils.loadAnimation(this, R.anim.warning_alert);
+		secondaryAnimation = AnimationUtils.loadAnimation(this, R.anim.secondary_alert);
+		montioringAnimation = (AnimationDrawable) mMonitoring.getBackground();		 
 	}
 }

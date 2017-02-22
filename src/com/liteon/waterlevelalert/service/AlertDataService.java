@@ -35,13 +35,13 @@ public class AlertDataService extends Service {
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		if (mConnectThread == null) {
-			mConnectThread = new DataThread();
-			mConnectThread.start();
-		}
+
 		String action = intent.getAction();
 		if (action != null && action.equals(Def.BROADCAST_ACTION_GET_LEVEL)){
 			sendAlert(null, getLevelString(currentStatus));
+		} else if (mConnectThread == null) {
+			mConnectThread = new DataThread();
+			mConnectThread.start();
 		}
 		Log.d(TAG, "onStartCommand");
 		return 0;

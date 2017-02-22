@@ -10,6 +10,7 @@
 	   android:background="@drawable/alert_gnd"/>
 
 	<ImageView 
+	    android:id="@+id/map_bg"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_marginTop="@dimen/activity_title_bar_height"
@@ -17,38 +18,42 @@
 	    android:background="@drawable/water0alert_gnd_mapgps"/>
 	<FrameLayout
 	    android:id="@+id/alert_frame"
-	   	android:layout_width="match_parent"
-	    android:layout_height="388dp"
+	   	android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
 	    android:layout_centerInParent="true">
 	   <ImageView
 	       	android:id="@+id/warning" 
-	   		android:layout_width="match_parent"
-	   		android:layout_height="match_parent"
-	   		android:background="#FFFF0000"
+	   		android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:scaleType="center"
+	   		android:background="@drawable/water0alert_img_floodwarning"
 	   		android:visibility="invisible"
 	   />
 	   <ImageView 
 	        android:id="@+id/secondary_alert"
-	   		android:layout_width="match_parent"
-	   		android:layout_height="match_parent"
-	   		android:background="#FF00FF00"
+	   		android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:scaleType="center"
+	   		android:background="@drawable/water0alert_img_floodalert"
 	   		android:visibility="invisible"
 	   />
 	   <ImageView 
 	       	android:id="@+id/thirdary_alert"
-	   		android:layout_width="match_parent"
-	   		android:layout_height="match_parent"
-	   		android:background="#FF0000FF"
+	   		android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:scaleType="center"
+	   		android:background="@drawable/water0alert_img_severeflood"
+	   		android:visibility="invisible"
+	   />
+	   <ImageView 
+	       	android:id="@+id/monitoring_alert"
+	   		android:layout_width="wrap_content"
+	   		android:layout_height="wrap_content"
+	   		android:scaleType="center"
+			android:background="@drawable/monitoring"
 	   		android:visibility="invisible"
 	   />
 	</FrameLayout>
-	<TextView 
-	    android:id="@+id/alert_status"
-	    android:layout_below="@id/alert_frame"
-	    android:textSize="36sp"
-	    android:layout_centerHorizontal="true"
-	    android:layout_width="410dp"
-	    android:layout_height="50dp"/>
 
 	<LinearLayout 
 	    android:layout_width="match_parent"

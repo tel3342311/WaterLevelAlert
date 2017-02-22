@@ -74,10 +74,6 @@ public class MainActivity extends Activity {
 		}
 	};
 	
-	protected void onPause() {
-		super.onPause();
-		stopAlertService();
-	};
 	@Override
 	protected void onStop() {
 		super.onStop();

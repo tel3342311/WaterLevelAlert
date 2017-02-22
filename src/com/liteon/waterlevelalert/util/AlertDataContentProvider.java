@@ -74,5 +74,4 @@ public class AlertDataContentProvider extends ContentProvider {
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
 		return 0;
 	}
-
 }

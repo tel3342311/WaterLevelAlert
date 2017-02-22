@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.liteon.waterlevelalert.video" >
+    android:background="@drawable/video_gnd"
+    tools:context="com.liteon.waterlevelalert.VideoActivity" >
 
 	<LinearLayout
 	    android:id="@+id/video_control"
