@@ -50,7 +50,6 @@ public class WaterAlertActivity extends Activity {
 				startAnimation(mMonitoring, montioringAnimation);
 			}
 		}
-		
 	};
 	
 	@Override
@@ -96,6 +95,6 @@ public class WaterAlertActivity extends Activity {
 	private void setupAnimation(){
 		warningAnimation = AnimationUtils.loadAnimation(this, R.anim.warning_alert);
 		secondaryAnimation = AnimationUtils.loadAnimation(this, R.anim.secondary_alert);
-		montioringAnimation = (AnimationDrawable) mMonitoring.getBackground();		 
+		montioringAnimation = (AnimationDrawable) mMonitoring.getBackground();
 	}
 }

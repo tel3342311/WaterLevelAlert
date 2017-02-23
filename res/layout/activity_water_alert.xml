@@ -45,13 +45,15 @@
 	   		android:background="@drawable/water0alert_img_severeflood"
 	   		android:visibility="invisible"
 	   />
+	   <!--FIXME: AndroidDrawable @drawable/monitoring cause OutOfMemory exception-->
+	   <!--Because it loads all frame of animation at once  -->
 	   <ImageView 
 	       	android:id="@+id/monitoring_alert"
 	   		android:layout_width="wrap_content"
 	   		android:layout_height="wrap_content"
 	   		android:scaleType="center"
-			android:background="@drawable/monitoring"
 	   		android:visibility="invisible"
+	   		android:background="@drawable/monitoring"
 	   />
 	</FrameLayout>
 
