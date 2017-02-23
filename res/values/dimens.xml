@@ -15,5 +15,6 @@
 	<dimen name="activity_alert_text_size">32sp</dimen>
 	<dimen name="activity_datareocrd_title_bar_height">158dp</dimen>
 	<dimen name="activity_datarecord_text_size">20sp</dimen>
+	<dimen name="activity_video_btn_margin">25dp</dimen>
 	
 </resources>

@@ -1,29 +1,52 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/video_gnd"
+    android:orientation="vertical"
     tools:context="com.liteon.waterlevelalert.VideoActivity" >
+
+    <ImageView 
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="14"/>
+
+   	<LinearLayout 
+       android:layout_width="match_parent"
+       android:layout_height="0dp"	
+       android:layout_weight="99"
+       android:background="#44000000">
+  
+       <VideoView 
+	       android:layout_gravity="center_vertical"
+		   android:layout_width="match_parent"
+		   android:layout_height="wrap_content"
+		   android:id="@+id/video_view"
+	   />
+	</LinearLayout>
 
 	<LinearLayout
 	    android:id="@+id/video_control"
 	    android:orientation="vertical"
 	    android:layout_width="match_parent"
-	    android:layout_height="200dp"
-	    android:layout_alignParentBottom="true"
-	    android:background="#ffef9b21">
-
+	    android:layout_height="0dp"
+	    android:background="#ffef9b21"
+	    android:layout_weight="27">
 	    <LinearLayout
 	        android:orientation="horizontal"
 	        android:layout_width="match_parent"
-	        android:layout_height="100dp">
+	        android:layout_height="0dp"
+	        android:layout_weight="1">
 	        
 	        <TextView 
 	            android:id="@+id/start_progess"
 	            android:layout_width="0dp"
 	            android:layout_height="match_parent"
 	            android:layout_weight="1"
-	            android:text="00:00"/>
+	            android:gravity="center"
+	            android:text="00:00"
+	           	android:textSize="24sp"
+	           	android:textColor="#FFFFFFFF"/>
 
 	   		<ProgressBar 
 	   		    android:id="@+id/progress_bar"
@@ -33,48 +56,47 @@
 	   		    android:layout_height="match_parent"/>
 	   		<TextView 
 	            android:id="@+id/end_progess"
+	            android:clickable="true"
 	            android:layout_width="0dp"
 	           	android:layout_weight="1" 
 	            android:layout_height="match_parent"
-	            android:layout_gravity="right"
-	            android:text="99:99"/>
+	            android:gravity="center"
+	            android:text="99:99"
+	           	android:textSize="24sp"
+	           	android:textColor="#FFFFFFFF"/>
 	   		
 	   	</LinearLayout>
 	   	
 	    <RelativeLayout 
 	        android:layout_width="match_parent"
-	        android:layout_height="match_parent">
+	        android:layout_height="0dp"
+	        android:layout_weight="1">
 	        <ImageView 
 	            android:id="@+id/volume"
-	            android:layout_width="100dp"
-	            android:layout_height="match_parent" 
+	           	android:clickable="true"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" 
 	            android:layout_alignParentLeft="true"
-	            android:background="#FFFF0000"/>
+	            android:layout_centerVertical="true"	            
+	            android:layout_marginLeft="@dimen/activity_video_btn_margin"
+	            android:background="@drawable/volume_btn"/>
 	        <ImageView 
 	            android:id="@+id/play"
-	            android:layout_width="100dp"
-	            android:layout_height="match_parent" 
+	           	android:clickable="true"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content" 
 	            android:layout_centerHorizontal="true"
-	            android:background="#FF00FF00"/>
+	            android:background="@drawable/play_btn"/>
 	        <ImageView 
 	            android:id="@+id/fullscreen"
-	            android:layout_width="100dp"
-	            android:layout_height="match_parent"
-	            android:background="#FF0000FF" 
-	            android:layout_alignParentRight="true"/>	    
+	           	android:clickable="true"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:background="@drawable/fullscreen_btn" 
+	           	android:layout_centerVertical="true"
+	            android:layout_alignParentRight="true"
+	           	android:layout_marginRight="@dimen/activity_video_btn_margin"/>	    
 		</RelativeLayout>
 	</LinearLayout>
-	<LinearLayout 
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"	
-       android:layout_above="@id/video_control"
-       android:background="#FF000000">
-  
-       <VideoView 
-	       android:layout_gravity="center_vertical"
-		   android:layout_width="match_parent"
-		   android:layout_height="wrap_content"
-		   android:id="@+id/video_view"
-	   />
-	</LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>
