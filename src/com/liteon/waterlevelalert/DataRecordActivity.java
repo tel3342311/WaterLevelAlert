@@ -66,7 +66,7 @@ public class DataRecordActivity extends Activity {
 	
 	private void getData(ArrayList<DataRecord> list, Uri uri) {
 		Cursor cursor = getContentResolver().query(uri, null,null, null, null);
-		if (cursor.getColumnCount() > 0) {
+		if (cursor.getCount() > 0) {
 			do{
 				insertData(list,cursor);
 			} while (cursor.moveToNext());
