@@ -1,9 +1,14 @@
 package com.liteon.waterlevelalert;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +26,29 @@ public class VideoActivity extends Activity{
 	private TextView mVideoStartTime;
 	private TextView mVideoEndTime;
 	private ProgressBar mProgress;
+	private int mDuration;
+	private Timer mUpdateUITimer;
+	private boolean isComplete;
+	
+	private void startUITimer() {
+		mUpdateUITimer = new Timer();
+	    TimerTask task = new TimerTask() {
+	        @Override
+	        public void run() {
+	            runOnUiThread(new Runnable() {
+	                @Override
+	                public void run() {
+	                    updateUI();
+	                }
+	            });
+	        }
+	    };
+	    mUpdateUITimer.schedule(task, 0, 100);
+	}
+	
+	private void stopUITimer() {
+		mUpdateUITimer.cancel();
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +79,25 @@ public class VideoActivity extends Activity{
 		Uri uri = Uri.parse("android.resource://"+getPackageName()+"/"+R.raw.rtrs);
 		mVideoView.setVideoURI(uri);
 		mVideoView.start();
+		mVideoView.setOnPreparedListener(new OnPreparedListener() {
+			
+			@Override
+			public void onPrepared(MediaPlayer mp) {
+				setDuration();	
+				startUITimer();
+			}
+		});
+		
+		mVideoView.setOnCompletionListener(new OnCompletionListener() {
+
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				isComplete = true;
+				mProgress.setProgress(100);
+				stopUITimer();
+			}
+			
+		});
 	}
 	
 	private View.OnClickListener mOnPlayPasueClickListener = new View.OnClickListener() {
@@ -59,7 +106,12 @@ public class VideoActivity extends Activity{
 			if (mVideoView.isPlaying()) {
 				mVideoView.pause();
 			} else {
-				mVideoView.start();
+				if (isComplete) {
+					setupVideoView();
+					isComplete = false;
+				} else {
+					mVideoView.start();
+				}
 			}
 		}
 	};
@@ -80,4 +132,14 @@ public class VideoActivity extends Activity{
 
 		}
 	}; 
+	
+	private void setDuration(){
+		mDuration = mVideoView.getDuration();
+	}
+	
+	private void updateUI() {
+		int current = mVideoView.getCurrentPosition();
+		int progress = current * 100 / mDuration;
+		mProgress.setProgress(progress);
+	}
 }

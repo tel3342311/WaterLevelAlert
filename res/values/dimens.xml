@@ -16,5 +16,5 @@
 	<dimen name="activity_datareocrd_title_bar_height">158dp</dimen>
 	<dimen name="activity_datarecord_text_size">20sp</dimen>
 	<dimen name="activity_video_btn_margin">25dp</dimen>
-	
+	<dimen name="activity_video_progressbar_height">18dp</dimen>
 </resources>
