@@ -1,42 +1,88 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/login_gnd"
     tools:context="com.liteon.waterlevelalert.LoginActivity" >
 
-	<TextView 
-	    android:id="@+id/title"
-	    android:layout_alignParentTop="true"
-	    android:layout_centerHorizontal="true"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:text="LEOTEK ScNT"/>
-	<EditText 
-	    android:id="@+id/user_name"
+	<RelativeLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="105dp"
-	    android:layout_below="@id/title"
-	    android:hint="Username"
-	    />
-	<EditText 
-	    android:id="@+id/password"
+	    android:layout_height="0dp"
+	    android:layout_weight="3.1" />
+	
+	<RelativeLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="105dp"
-	    android:layout_below="@id/user_name"
-	    android:password="true"
-	    android:hint="Password"
-	    />
-	<CheckBox
-	    android:id="@+id/keep_login"
-	    android:layout_below="@id/password"
-	    android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:hint="Keep me logged in"/>
-	<Button 
-	    android:id="@+id/login"
+	    android:layout_height="0dp"
+	    android:layout_weight="2.6">
+	    <RelativeLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="@dimen/activity_login_edittext_height"
+	        android:layout_alignParentTop="true">
+		    <!-- ICON -->
+	    	<ImageView
+				android:layout_marginLeft="@dimen/activity_login_edittext_margin"
+		        android:id="@+id/username_icon"
+		        android:src="@drawable/login_img_username"
+		        android:layout_centerVertical="true"
+		        android:layout_width="@dimen/activity_login_edittext_icon_size"
+		        android:layout_height="@dimen/activity_login_edittext_icon_size"/>
+	    	<EditText 
+			    android:id="@+id/user_name"
+			    android:layout_toRightOf="@+id/username_icon"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+				android:layout_marginRight="@dimen/activity_login_edittext_margin"
+			    android:background="@null"
+			    android:textSize="@dimen/activity_login_edittext_size"
+			    android:hint="Username"/>
+	    </RelativeLayout>
+		<RelativeLayout 
+	        android:layout_width="match_parent"
+	        android:layout_height="@dimen/activity_login_edittext_height"
+	        android:layout_alignParentBottom="true">
+	    	<!-- ICON -->
+	    	<ImageView
+				android:layout_marginLeft="@dimen/activity_login_edittext_margin"
+		        android:id="@+id/password_icon"
+		        android:src="@drawable/login_img_password"
+		        android:layout_centerVertical="true"
+		        android:layout_width="@dimen/activity_login_edittext_icon_size"
+		        android:layout_height="@dimen/activity_login_edittext_icon_size"/>
+			<EditText 
+			    android:id="@+id/password"
+			    android:layout_width="match_parent"
+			    android:layout_height="@dimen/activity_login_edittext_height"
+			    android:layout_toRightOf="@+id/password_icon"
+				android:layout_marginRight="@dimen/activity_login_edittext_margin"
+			    android:layout_alignParentBottom="true"
+			    android:background="@null"
+			    android:textSize="@dimen/activity_login_edittext_size"
+			    android:password="true"
+			    android:hint="Password"/>
+		</RelativeLayout>
+	</RelativeLayout>
+	<RelativeLayout
 	    android:layout_width="match_parent"
-	    android:layout_height="100dp"
-	    android:layout_alignParentBottom="true"
-	    android:text="Login"/>
-
-</RelativeLayout>
+	    android:layout_height="0dp"
+	    android:layout_weight="8.4">
+		<ToggleButton
+		    android:id="@+id/keep_login"
+		    android:layout_width="@dimen/activity_login_checkbox_margin_size"
+		    android:layout_height="@dimen/activity_login_checkbox_margin_size"
+		    android:background="@drawable/confirm_btn"
+		    android:layout_marginLeft="@dimen/activity_login_checkbox_margin_left"
+		    android:layout_marginTop="@dimen/activity_login_checkbox_margin_top"
+		    android:textOn="@null"
+	        android:textOff="@null"
+	        android:focusable="false"
+	        android:focusableInTouchMode="false"/>
+		<Button 
+		    android:id="@+id/login"
+		  	android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentBottom="true"
+			android:background="@drawable/login_btn"
+			android:text="@null"/>
+	</RelativeLayout>
+</LinearLayout>

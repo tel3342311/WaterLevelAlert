@@ -9,12 +9,13 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ToggleButton;
 
 public class LoginActivity extends Activity {
 
 	private EditText mUserName;
 	private EditText mPassword;
-	private CheckBox mKeepLogin;
+	private ToggleButton mKeepLogin;
 	private Button mLogin;
 	
 	@Override
@@ -28,7 +29,7 @@ public class LoginActivity extends Activity {
 	private void findView() {
 		mUserName = (EditText) findViewById(R.id.user_name);
 		mPassword = (EditText) findViewById(R.id.password);
-		mKeepLogin = (CheckBox) findViewById(R.id.keep_login);
+		mKeepLogin = (ToggleButton) findViewById(R.id.keep_login);
 		mLogin = (Button) findViewById(R.id.login);
 	}
 	
