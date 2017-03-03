@@ -9,8 +9,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -22,6 +24,7 @@ public class WaterAlertActivity extends Activity {
 	ImageView mSecondary;
 	ImageView mThirdary;
 	ImageView mMap;
+	ImageView mBack;
 	Animation warningAnimation; 
 	Animation secondaryAnimation;
 	AnimationDrawable montioringAnimation;
@@ -57,6 +60,7 @@ public class WaterAlertActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_water_alert);
 		findViews();
+		setListener();
 		setupAnimation();
 		mMonitoring.setVisibility(View.VISIBLE);
 	}
@@ -67,7 +71,20 @@ public class WaterAlertActivity extends Activity {
 		mThirdary = (ImageView) findViewById(R.id.thirdary_alert);
 		mMap = (ImageView) findViewById(R.id.map_bg);
 		mMonitoring = (ImageView) findViewById(R.id.monitoring_alert);
+		mBack = (ImageView) findViewById(R.id.back_btn);
 	}
+	
+	private void setListener() {
+		mBack.setOnClickListener(mOnBackClickListener);
+	}
+	
+	private View.OnClickListener mOnBackClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			onBackPressed();
+		}
+	}; 
+	
 	@Override
 	protected void onResume() {
 		super.onResume();

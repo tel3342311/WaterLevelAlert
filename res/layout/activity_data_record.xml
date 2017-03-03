@@ -2,18 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF59632"
+	android:background="@drawable/datarecord_gnd"
     tools:context="com.liteon.waterlevelalert.DataRecordActivity" >
 
-    <ImageView 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/datarecord_gnd"/>
+    <include android:id="@+id/title" 
+	    	layout="@layout/back_button_layout" />
+    
     <LinearLayout 
         android:id="@+id/list_title"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/activity_datarecord_listview_title_height"
         android:layout_marginTop="@dimen/activity_title_bar_height">
         <TextView 
             android:layout_width="0dp"

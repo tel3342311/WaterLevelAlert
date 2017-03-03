@@ -3,6 +3,7 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_back_btn_margin">16dp</dimen>
     <!--Main activity  -->
 	<dimen name="activity_main_bottom_bar_height">94dp</dimen>
 	<dimen name="activity_main_bottom_logo_width">210dp</dimen>
@@ -17,6 +18,7 @@
 	<dimen name="activity_alert_text_size">32sp</dimen>
 	<!--Data Reocrd activity  -->
 	<dimen name="activity_datareocrd_title_bar_height">158dp</dimen>
+	<dimen name="activity_datarecord_listview_title_height">72dp</dimen>
 	<dimen name="activity_datarecord_text_size">20sp</dimen>
 	<!--Video activity  -->
 	<dimen name="activity_video_btn_margin">25dp</dimen>

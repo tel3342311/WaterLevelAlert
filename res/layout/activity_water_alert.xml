@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/alert_gnd"
     tools:context="com.liteon.waterlevelalert.WaterAlertActivity" >
 
-	<ImageView 
-	   android:layout_width="match_parent"
-	   android:layout_height="match_parent"
-	   android:background="@drawable/alert_gnd"/>
-
+	<include android:id="@+id/title" 
+	    	layout="@layout/back_button_layout" />
+	
 	<ImageView 
 	    android:id="@+id/map_bg"
 	    android:layout_width="match_parent"

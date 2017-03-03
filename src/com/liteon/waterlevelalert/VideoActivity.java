@@ -23,6 +23,7 @@ public class VideoActivity extends Activity{
 	private ImageView mPlay;
 	private ImageView mVolume;
 	private ImageView mFullScreen;
+	private ImageView mBack;
 	private TextView mVideoStartTime;
 	private TextView mVideoEndTime;
 	private ProgressBar mProgress;
@@ -67,12 +68,14 @@ public class VideoActivity extends Activity{
 		mVideoStartTime = (TextView) findViewById(R.id.start_progess);
 		mVideoEndTime = (TextView) findViewById(R.id.end_progess);
 		mProgress = (ProgressBar) findViewById(R.id.progress_bar);
+		mBack = (ImageView) findViewById(R.id.back_btn);
  	}
 	
 	private void setListener() {
 		mPlay.setOnClickListener(mOnPlayPasueClickListener);
 		mFullScreen.setOnClickListener(mOnFullScreeenClickListener);
 		mVolume.setOnClickListener(mOnVolumeClickListener);
+		mBack.setOnClickListener(mOnBackClickListener);
 	}
 	
 	private void setupVideoView() {
@@ -132,6 +135,13 @@ public class VideoActivity extends Activity{
 
 		}
 	}; 
+	
+	private View.OnClickListener mOnBackClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			onBackPressed();
+		}
+	};
 	
 	private void setDuration(){
 		mDuration = mVideoView.getDuration();

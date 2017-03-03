@@ -24,6 +24,8 @@ import android.os.Bundle;
 import android.provider.Contacts.Intents.Insert;
 import android.provider.ContactsContract.Contacts.Data;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 public class DataRecordActivity extends Activity {
@@ -31,6 +33,7 @@ public class DataRecordActivity extends Activity {
 	private ArrayList<DataRecord> mList = new ArrayList<DataRecord>();
 	private ListView mListView;
 	private DataAdapter mAdapter;
+	private ImageView mBack;
 	
 	private BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
 		
@@ -49,14 +52,26 @@ public class DataRecordActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_data_record);
 		findView();
+		setupListener();
 		setupListView();
 		new loadDataFromDB().execute(AlertEntry.CONTENT_URI);
 	}
 	
 	private void findView() {
-		mListView = (ListView)findViewById(R.id.listview);
-		
+		mListView = (ListView) findViewById(R.id.listview);
+		mBack = (ImageView) findViewById(R.id.back_btn);
 	}
+	
+	private void setupListener() {
+		mBack.setOnClickListener(mOnBackClickListener);
+	}
+	
+	private View.OnClickListener mOnBackClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			onBackPressed();
+		}
+	};
 	
 	private void setupListView() {
 		mAdapter = new DataAdapter(this);

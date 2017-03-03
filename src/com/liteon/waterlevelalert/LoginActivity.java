@@ -9,6 +9,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ToggleButton;
 
 public class LoginActivity extends Activity {
@@ -17,6 +18,7 @@ public class LoginActivity extends Activity {
 	private EditText mPassword;
 	private ToggleButton mKeepLogin;
 	private Button mLogin;
+	private ImageView mBack;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class LoginActivity extends Activity {
 		mPassword = (EditText) findViewById(R.id.password);
 		mKeepLogin = (ToggleButton) findViewById(R.id.keep_login);
 		mLogin = (Button) findViewById(R.id.login);
+		mBack = (ImageView) findViewById(R.id.back_btn);
 	}
 	
 	private void setListener() {
@@ -53,5 +56,14 @@ public class LoginActivity extends Activity {
 			}
 			
 		});
+		
+		mBack.setOnClickListener(mOnBackClickListener);
 	}
+	
+	private View.OnClickListener mOnBackClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			onBackPressed();
+		}
+	};
 }

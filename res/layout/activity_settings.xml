@@ -6,10 +6,14 @@
     android:background="@drawable/setting_gnd"
     tools:context="com.liteon.waterlevelalert.SettingActivity" >
 
-	<View
+	<RelativeLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="0dp"
-	    android:layout_weight="4.3"/>
+	    android:layout_weight="4.3">
+	
+		<include android:id="@+id/title" 
+	    			layout="@layout/back_button_layout" />
+	</RelativeLayout>
 	
 	<RelativeLayout 
 	    android:layout_width="match_parent"
