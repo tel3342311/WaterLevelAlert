@@ -5,55 +5,64 @@
     android:background="@drawable/alert_gnd"
     tools:context="com.liteon.waterlevelalert.WaterAlertActivity" >
 
-	<include android:id="@+id/title" 
-	    	layout="@layout/back_button_layout" />
+	<include
+	    android:id="@+id/title"
+	    android:layout_width="match_parent"
+	    android:layout_height="@dimen/activity_title_bar_height"
+	    layout="@layout/back_button_layout" />
 	
 	<ImageView 
 	    android:id="@+id/map_bg"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-	    android:layout_marginTop="@dimen/activity_title_bar_height"
+	    android:layout_below="@id/title"
 	    android:layout_marginBottom="@dimen/activity_alert_bottom_height"
-	    android:background="@drawable/water0alert_gnd_mapgps"/>
+	    android:background="@drawable/water0alert_gnd_mapgps"/>	
 	<FrameLayout
 	    android:id="@+id/alert_frame"
-	   	android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:layout_centerInParent="true">
+	   	android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignTop="@id/map_bg"
+	    android:layout_alignBottom="@id/map_bg">
 	   <ImageView
 	       	android:id="@+id/warning" 
 	   		android:layout_width="wrap_content"
 	   		android:layout_height="wrap_content"
+	   		android:layout_gravity="center"
 	   		android:scaleType="center"
 	   		android:background="@drawable/water0alert_img_floodwarning"
-	   		android:visibility="invisible"
-	   />
+	   		android:visibility="invisible"/>
+	   
 	   <ImageView 
 	        android:id="@+id/secondary_alert"
 	   		android:layout_width="wrap_content"
 	   		android:layout_height="wrap_content"
+	   		android:layout_gravity="center"
 	   		android:scaleType="center"
 	   		android:background="@drawable/water0alert_img_floodalert"
-	   		android:visibility="invisible"
-	   />
+	   		android:visibility="invisible"/>
+	   
 	   <ImageView 
 	       	android:id="@+id/thirdary_alert"
 	   		android:layout_width="wrap_content"
 	   		android:layout_height="wrap_content"
+	   		android:layout_gravity="center"
 	   		android:scaleType="center"
 	   		android:background="@drawable/water0alert_img_severeflood"
-	   		android:visibility="invisible"
-	   />
+	   		android:visibility="invisible"/>
+	   
 	   <!--FIXME: AndroidDrawable @drawable/monitoring cause OutOfMemory exception-->
 	   <!--Because it loads all frame of animation at once  -->
-	   <ImageView 
-	       	android:id="@+id/monitoring_alert"
-	   		android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
-	   		android:scaleType="center"
-	   		android:visibility="invisible"
-	   		android:background="@drawable/monitoring"
-	   />
+
+	   <ImageView
+	       android:id="@+id/monitoring_alert"
+	       android:layout_width="wrap_content"
+	       android:layout_height="wrap_content"
+	       android:layout_gravity="center"
+	       android:background="@drawable/monitoring"
+	       android:scaleType="center"
+	       android:visibility="invisible" />
+
 	</FrameLayout>
 
 	<LinearLayout 
@@ -62,6 +71,17 @@
 	    android:orientation="vertical"
 	    android:layout_alignParentBottom="true"
 	    android:layout_marginLeft="@dimen/activity_alert_text_left_margin">
+	  
+	  	<TextView
+	      	android:id="@+id/pole_id"
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1"
+	        android:textSize="@dimen/activity_alert_text_size"
+	        android:gravity="center_vertical"
+	       	android:singleLine="true"
+	        android:text="E123231"
+	      	android:textColor="#FFFFFFFF" />	   
 	   <TextView 
 	        android:id="@+id/gps_data"
 	        android:layout_width="match_parent"
@@ -70,17 +90,10 @@
 	        android:textSize="@dimen/activity_alert_text_size"
 	        android:gravity="center_vertical"
 	        android:textColor="#FFFFFFFF"
+	        android:singleLine="true"
 	        android:text="47.1312435 ; 2.141413213"/>
 	  
-	  <TextView
-	      android:id="@+id/pole_id"
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="1"
-	        android:textSize="@dimen/activity_alert_text_size"
-	        android:gravity="center_vertical"
-	        android:text="E123231"
-	      	android:textColor="#FFFFFFFF" />
+
 	</LinearLayout>
 	  
 </RelativeLayout>

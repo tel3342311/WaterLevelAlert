@@ -4,10 +4,10 @@
     android:layout_height="@dimen/activity_title_bar_height">
     <ImageView 
         android:id="@+id/back_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/activity_back_btn_size"
+        android:layout_height="@dimen/activity_back_btn_size"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/activity_back_btn_margin"
+        android:layout_marginLeft="@dimen/activity_back_btn_margin_left" 
         android:background="@drawable/back_btn"
        	android:clickable="true"/>
 </RelativeLayout>

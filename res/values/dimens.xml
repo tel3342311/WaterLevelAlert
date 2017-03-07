@@ -3,19 +3,20 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="activity_back_btn_margin">16dp</dimen>
+    <dimen name="activity_back_btn_margin_left">15dp</dimen>
+    <dimen name="activity_back_btn_size">35dp</dimen>
     <!--Main activity  -->
 	<dimen name="activity_main_bottom_bar_height">60dp</dimen>
 	<dimen name="activity_main_bottom_logo_width">130dp</dimen>
 	<dimen name="activity_main_bottom_icon">70dp</dimen>
 	<dimen name="activity_main_bottom_icon_margin">7dp</dimen>
-	<dimen name="activity_title_bar_height">83dp</dimen>
+	<dimen name="activity_title_bar_height">54dp</dimen>
 	<!--Alert activity  -->
-	<dimen name="activity_alert_bottom_height">170dp</dimen>
-	<dimen name="activity_alert_text_left_margin">190dp</dimen>
+	<dimen name="activity_alert_bottom_height">111dp</dimen>
+	<dimen name="activity_alert_text_left_margin">120dp</dimen>
 	<dimen name="activity_alert_text_bottom_margin">30dp</dimen>
 	<dimen name="activity_alert_text_height">190dp</dimen>
-	<dimen name="activity_alert_text_size">32sp</dimen>
+	<dimen name="activity_alert_text_size">18sp</dimen>
 	<!--Data Reocrd activity  -->
 	<dimen name="activity_datareocrd_title_bar_height">158dp</dimen>
 	<dimen name="activity_datarecord_listview_title_height">72dp</dimen>
