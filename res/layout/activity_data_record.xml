@@ -5,8 +5,11 @@
 	android:background="@drawable/datarecord_gnd"
     tools:context="com.liteon.waterlevelalert.DataRecordActivity" >
 
-    <include android:id="@+id/title" 
-	    	layout="@layout/back_button_layout" />
+    <include 
+        android:id="@+id/title" 
+       	android:layout_width="match_parent"
+	    android:layout_height="@dimen/activity_title_bar_height"
+	    layout="@layout/back_button_layout" />
     
     <LinearLayout 
         android:id="@+id/list_title"

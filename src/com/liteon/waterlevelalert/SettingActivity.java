@@ -16,7 +16,6 @@ public class SettingActivity extends Activity {
 	private static final int REQUEST_CODE = 100;
 	private ToggleButton mLoginToggle;
 	private Button mSkip;
-	private TextView mLoginStatus;
 	private ImageView mBack;
 	
 	@Override
@@ -28,7 +27,6 @@ public class SettingActivity extends Activity {
 	}
 	private void findView() {
 		mLoginToggle = (ToggleButton) findViewById(R.id.toggle_login);
-		mLoginStatus = (TextView) findViewById(R.id.login_status);
 		mSkip = (Button) findViewById(R.id.skip);
 		mBack = (ImageView) findViewById(R.id.back_btn);
 	}
@@ -59,10 +57,8 @@ public class SettingActivity extends Activity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
         	mLoginToggle.setChecked(true);
-        	mLoginStatus.setText("You are logged in.");
         } else {
         	mLoginToggle.setChecked(false);
-        	mLoginStatus.setText("You are not logged in.");
         }
     }
 	

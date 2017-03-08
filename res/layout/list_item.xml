@@ -42,6 +42,6 @@
 		    android:layout_height="match_parent"
 		    android:textColor="#FFFFFFFF"
 		    android:textSize="@dimen/activity_datarecord_text_size"
-		   	android:gravity="center"/>
+		    android:gravity="center_vertical"/>
 	</LinearLayout>
 </LinearLayout>
