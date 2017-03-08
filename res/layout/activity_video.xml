@@ -96,8 +96,9 @@
 		android:layout_width="match_parent"
 		android:layout_height="match_parent"
 		android:layout_above="@id/video_control"
+		android:clickable="true"
 		android:id="@+id/video_view"/>  
-	<ImageView 
+	<ImageView
 	    android:id="@+id/video_status"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"

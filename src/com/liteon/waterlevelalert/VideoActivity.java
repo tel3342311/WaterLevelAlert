@@ -14,6 +14,7 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -40,8 +41,10 @@ public class VideoActivity extends Activity{
 	private int mDuration;
 	private Timer mUpdateUITimer;
 	private boolean isComplete;
-	private RelativeLayout mRootLayout;
 	private Animation videoStatus;
+	private View mVideoControl;
+	private View mRootLayout;
+	private boolean mIsHideControl;
 	
 	private void startUITimer() {
 		mUpdateUITimer = new Timer();
@@ -74,7 +77,6 @@ public class VideoActivity extends Activity{
 	}
 	
 	private void findView() {
-		mRootLayout = (RelativeLayout) findViewById(R.id.video_bg);
 		mVideoView = (VideoView) findViewById(R.id.video_view);
 		mPlay = (ImageView) findViewById(R.id.play);
 		mVolume = (ImageView) findViewById(R.id.volume);
@@ -84,6 +86,8 @@ public class VideoActivity extends Activity{
 		mProgress = (SeekBar) findViewById(R.id.progress_bar);
 		mBack = (ImageView) findViewById(R.id.back_btn);
 		mVideoStatus = (ImageView) findViewById(R.id.video_status);
+		mVideoControl = findViewById(R.id.video_control);
+		mRootLayout = findViewById(R.id.video_bg);
  	}
 	
 	private void setListener() {
@@ -92,6 +96,7 @@ public class VideoActivity extends Activity{
 		mVolume.setOnClickListener(mOnVolumeClickListener);
 		mBack.setOnClickListener(mOnBackClickListener);
 		mProgress.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
+		mVideoView.setOnClickListener(mOnVideoViewClickListener);
 	}
 	
 	private void setupVideoView() {
@@ -152,7 +157,7 @@ public class VideoActivity extends Activity{
 	private View.OnClickListener mOnFullScreeenClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			
+			hideControl();
 		}
 	}; 
 	
@@ -187,6 +192,16 @@ public class VideoActivity extends Activity{
 		}
 		
 	};
+	
+	private View.OnClickListener mOnVideoViewClickListener = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			if (mIsHideControl) {
+				showControl();
+			}
+		}
+	};
 	private void setDuration(){
 		mDuration = mVideoView.getDuration();
 		mVideoEndTime.setText(getProgressString(mDuration));
@@ -208,5 +223,20 @@ public class VideoActivity extends Activity{
 	
 	private void setupAnimation(){
 		videoStatus = AnimationUtils.loadAnimation(this, R.anim.video_status);
+	}
+	
+	private void hideControl() {
+		mVideoControl.setVisibility(View.INVISIBLE);
+		mRootLayout.setBackground(null);
+		mRootLayout.setBackgroundColor(0xFF000000);
+		mBack.setVisibility(View.INVISIBLE);
+		mIsHideControl = true;
+	}
+	
+	private void showControl() {
+		mVideoControl.setVisibility(View.VISIBLE);
+		mRootLayout.setBackground(getResources().getDrawable(R.drawable.video_gnd));
+		mBack.setVisibility(View.VISIBLE);
+		mIsHideControl = false;
 	}
 }
