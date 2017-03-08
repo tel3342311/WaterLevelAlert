@@ -11,13 +11,15 @@
 	    android:layout_height="@dimen/activity_title_bar_height"
 	    layout="@layout/back_button_layout" />
 	
-	<ImageView 
+	<com.liteon.waterlevelalert.util.MapImageView 
 	    android:id="@+id/map_bg"
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_below="@id/title"
 	    android:layout_marginBottom="@dimen/activity_alert_bottom_height"
-	    android:background="@drawable/water0alert_gnd_mapgps"/>	
+	    android:src="@drawable/water0alert_gnd_mapgps"
+	    android:clickable="true"
+	    android:background="#FF000000"/>	
 	<FrameLayout
 	    android:id="@+id/alert_frame"
 	   	android:layout_width="match_parent"
