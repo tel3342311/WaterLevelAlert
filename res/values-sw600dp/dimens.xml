@@ -18,12 +18,14 @@
 	<dimen name="activity_alert_text_height">190dp</dimen>
 	<dimen name="activity_alert_text_size">32sp</dimen>
 	<!--Data Reocrd activity  -->
-	<dimen name="activity_datareocrd_title_bar_height">158dp</dimen>
 	<dimen name="activity_datarecord_listview_title_height">72dp</dimen>
 	<dimen name="activity_datarecord_text_size">20sp</dimen>
 	<!--Video activity  -->
 	<dimen name="activity_video_btn_margin">25dp</dimen>
-	<dimen name="activity_video_progressbar_height">18dp</dimen>
+	<dimen name="activity_video_progressbar_height">14dp</dimen>
+	<dimen name="activity_video_bottom_bar_height">150dp</dimen>
+	<dimen name="activity_video_progress_text_size">24sp</dimen>
+	<dimen name="activity_video_icon_size">60dp</dimen>
 	<!--Login activity  -->
 	<dimen name="activity_setting_toggle_margin_right">25dp</dimen>
 	<!--Login activity  -->

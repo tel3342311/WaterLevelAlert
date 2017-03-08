@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
@@ -13,10 +14,15 @@ import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -27,13 +33,15 @@ public class VideoActivity extends Activity{
 	private ImageView mVolume;
 	private ImageView mFullScreen;
 	private ImageView mBack;
+	private ImageView mVideoStatus;
 	private TextView mVideoStartTime;
 	private TextView mVideoEndTime;
-	private ProgressBar mProgress;
+	private SeekBar mProgress;
 	private int mDuration;
 	private Timer mUpdateUITimer;
 	private boolean isComplete;
-	private LinearLayout mRootLayout;
+	private RelativeLayout mRootLayout;
+	private Animation videoStatus;
 	
 	private void startUITimer() {
 		mUpdateUITimer = new Timer();
@@ -48,7 +56,7 @@ public class VideoActivity extends Activity{
 	            });
 	        }
 	    };
-	    mUpdateUITimer.schedule(task, 0, 100);
+	    mUpdateUITimer.schedule(task, 0, 50);
 	}
 	
 	private void stopUITimer() {
@@ -62,18 +70,20 @@ public class VideoActivity extends Activity{
 		findView();
 		setupVideoView();
 		setListener();
+		setupAnimation();
 	}
 	
 	private void findView() {
-		mRootLayout = (LinearLayout) findViewById(R.id.video_bg);
+		mRootLayout = (RelativeLayout) findViewById(R.id.video_bg);
 		mVideoView = (VideoView) findViewById(R.id.video_view);
 		mPlay = (ImageView) findViewById(R.id.play);
 		mVolume = (ImageView) findViewById(R.id.volume);
 		mFullScreen = (ImageView) findViewById(R.id.fullscreen);
 		mVideoStartTime = (TextView) findViewById(R.id.start_progess);
 		mVideoEndTime = (TextView) findViewById(R.id.end_progess);
-		mProgress = (ProgressBar) findViewById(R.id.progress_bar);
+		mProgress = (SeekBar) findViewById(R.id.progress_bar);
 		mBack = (ImageView) findViewById(R.id.back_btn);
+		mVideoStatus = (ImageView) findViewById(R.id.video_status);
  	}
 	
 	private void setListener() {
@@ -81,6 +91,7 @@ public class VideoActivity extends Activity{
 		mFullScreen.setOnClickListener(mOnFullScreeenClickListener);
 		mVolume.setOnClickListener(mOnVolumeClickListener);
 		mBack.setOnClickListener(mOnBackClickListener);
+		mProgress.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
 	}
 	
 	private void setupVideoView() {
@@ -113,6 +124,8 @@ public class VideoActivity extends Activity{
 		public void onClick(View v) {
 			if (mVideoView.isPlaying()) {
 				mVideoView.pause();
+				mVideoStatus.setBackgroundResource(R.drawable.pause_btn);
+				mVideoStatus.startAnimation(videoStatus);
 			} else {
 				if (isComplete) {
 					setupVideoView();
@@ -120,6 +133,8 @@ public class VideoActivity extends Activity{
 				} else {
 					mVideoView.start();
 				}
+				mVideoStatus.setBackgroundResource(R.drawable.video_btn_play2);
+				mVideoStatus.startAnimation(videoStatus);
 			}
 		}
 	};
@@ -137,7 +152,7 @@ public class VideoActivity extends Activity{
 	private View.OnClickListener mOnFullScreeenClickListener = new View.OnClickListener() {
 		@Override
 		public void onClick(View v) {
-			makeVideoFullScreen();
+			
 		}
 	}; 
 	
@@ -148,53 +163,50 @@ public class VideoActivity extends Activity{
 		}
 	};
 	
+	private SeekBar.OnSeekBarChangeListener mOnSeekBarChangeListener = new OnSeekBarChangeListener() {
+
+		@Override
+		public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+			if (fromUser) {
+				stopUITimer();
+				int position = mDuration * progress / 100; 
+				mVideoView.seekTo(position);
+				updateUI();
+				startUITimer();
+			}
+		}
+
+		@Override
+		public void onStartTrackingTouch(SeekBar seekBar) {
+			
+		}
+
+		@Override
+		public void onStopTrackingTouch(SeekBar seekBar) {
+			
+		}
+		
+	};
 	private void setDuration(){
 		mDuration = mVideoView.getDuration();
+		mVideoEndTime.setText(getProgressString(mDuration));
 	}
 	
 	private void updateUI() {
 		int current = mVideoView.getCurrentPosition();
 		int progress = current * 100 / mDuration;
 		mProgress.setProgress(progress);
+		mVideoStartTime.setText(getProgressString(current));
 	}
 	
-	private LinearLayout.LayoutParams defaultVideoViewParams;
-	private int defaultScreenOrientationMode;
-
-	// play video in fullscreen mode
-	private void makeVideoFullScreen() {
-
-	    defaultScreenOrientationMode = getResources().getConfiguration().orientation;
-	    defaultVideoViewParams = (LayoutParams) mVideoView.getLayoutParams();
-
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
- 
-    	mVideoView.postDelayed(new Runnable() {
-
-	        @Override
-	        public void run() {
-	        	LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) new LinearLayout.LayoutParams(
-	        			LinearLayout.LayoutParams.MATCH_PARENT,
-	        			LinearLayout.LayoutParams.MATCH_PARENT);
-	            mVideoView.setLayoutParams(params);
-	            mVideoView.layout(10, 10, 10, 10);
-	        }
-	    }, 700);
+	private String getProgressString(int duration) {
+		duration /= 1000;
+		int minutes = (duration / 60);
+        int seconds = duration - (minutes * 60) ;
+        return String.format("%02d:%02d", minutes, seconds);
 	}
-
-
-	// close fullscreen mode
-	private void exitVideoFullScreen() {
-	    setRequestedOrientation(defaultScreenOrientationMode);
-	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-
-	    mVideoView.postDelayed(new Runnable() {
-
-	        @Override
-	        public void run() {
-	        	mVideoView.setLayoutParams(defaultVideoViewParams);
-	        	mVideoView.layout(10, 10, 10, 10);
-	        }
-	    }, 700);
+	
+	private void setupAnimation(){
+		videoStatus = AnimationUtils.loadAnimation(this, R.anim.video_status);
 	}
 }

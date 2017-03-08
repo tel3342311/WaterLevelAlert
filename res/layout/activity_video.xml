@@ -1,42 +1,24 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/video_bg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/video_gnd"
-    android:orientation="vertical"
     tools:context="com.liteon.waterlevelalert.VideoActivity" >
-
-    <LinearLayout 
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="14">
     
-        <include android:id="@+id/title" 
-	    	layout="@layout/back_button_layout" />
-    </LinearLayout>
-
-   	<LinearLayout 
-       android:layout_width="match_parent"
-       android:layout_height="0dp"	
-       android:layout_weight="99"
-       android:background="#FFFFFFFF">
-  
-       <VideoView 
-	       android:layout_gravity="center_vertical"
-		   android:layout_width="match_parent"
-		   android:layout_height="wrap_content"
-		   android:id="@+id/video_view"
-	   />
-	</LinearLayout>
+	<include
+	    android:id="@+id/title"
+	    android:layout_width="match_parent"
+	    android:layout_height="@dimen/activity_title_bar_height"
+	    layout="@layout/back_button_layout" />
 
 	<LinearLayout
 	    android:id="@+id/video_control"
 	    android:orientation="vertical"
 	    android:layout_width="match_parent"
-	    android:layout_height="0dp"
-	    android:background="#ffef9b21"
-	    android:layout_weight="27">
+	    android:layout_height="@dimen/activity_video_bottom_bar_height"
+	    android:layout_alignParentBottom="true"
+	    android:background="#00ef9b21">
 	    <LinearLayout
 	        android:orientation="horizontal"
 	        android:layout_width="match_parent"
@@ -50,17 +32,18 @@
 	            android:layout_weight="1"
 	            android:gravity="center"
 	            android:text="00:00"
-	           	android:textSize="24sp"
+	           	android:textSize="@dimen/activity_video_progress_text_size"
 	           	android:textColor="#FFFFFFFF"/>
 
-	   		<ProgressBar
+	   		<SeekBar
 	   		    android:id="@+id/progress_bar"
-	   		    style="?android:attr/progressBarStyleHorizontal"
 	   		    android:layout_width="0dp"
-	   		    android:layout_height="14dp"
+	   		    android:layout_height="@dimen/activity_video_progressbar_height"
 	   		    android:layout_gravity="center_vertical"
-	   		    android:layout_weight="5.68"
-	   		    android:progressDrawable="@drawable/progress_bar" />
+	   		    android:layout_weight="5"
+	   		    android:padding="0dp"
+	   		    android:progressDrawable="@drawable/progress_bar"
+	   		    android:thumb="@null" />
 
 	   		<TextView 
 	            android:id="@+id/end_progess"
@@ -70,7 +53,7 @@
 	            android:layout_height="match_parent"
 	            android:gravity="center"
 	            android:text="99:99"
-	           	android:textSize="24sp"
+	           	android:textSize="@dimen/activity_video_progress_text_size"
 	           	android:textColor="#FFFFFFFF"/>
 	   		
 	   	</LinearLayout>
@@ -82,8 +65,8 @@
 	        <ImageView 
 	            android:id="@+id/volume"
 	           	android:clickable="true"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content" 
+	            android:layout_width="@dimen/activity_video_icon_size"
+	            android:layout_height="@dimen/activity_video_icon_size" 
 	            android:layout_alignParentLeft="true"
 	            android:layout_centerVertical="true"	            
 	            android:layout_marginLeft="@dimen/activity_video_btn_margin"
@@ -91,19 +74,34 @@
 	        <ImageView 
 	            android:id="@+id/play"
 	           	android:clickable="true"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content" 
+	            android:layout_width="@dimen/activity_video_icon_size"
+	            android:layout_height="@dimen/activity_video_icon_size" 
 	            android:layout_centerHorizontal="true"
+	           	android:layout_centerVertical="true"
 	            android:background="@drawable/play_btn"/>
 	        <ImageView 
 	            android:id="@+id/fullscreen"
 	           	android:clickable="true"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
+	            android:layout_width="@dimen/activity_video_icon_size"
+	            android:layout_height="@dimen/activity_video_icon_size"
 	            android:background="@drawable/fullscreen_btn" 
 	           	android:layout_centerVertical="true"
 	            android:layout_alignParentRight="true"
 	           	android:layout_marginRight="@dimen/activity_video_btn_margin"/>	    
 		</RelativeLayout>
 	</LinearLayout>
-</LinearLayout>
+	
+	<VideoView 
+		android:layout_below="@id/title"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:layout_above="@id/video_control"
+		android:id="@+id/video_view"/>  
+	<ImageView 
+	    android:id="@+id/video_status"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_centerInParent="true"
+	    android:visibility="invisible"/>
+		
+</RelativeLayout>
