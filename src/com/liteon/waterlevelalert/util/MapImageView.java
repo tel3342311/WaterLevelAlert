@@ -375,63 +375,14 @@ public class MapImageView extends ImageView {
             float scale;
             int initX = 0;
             int initY = 0;
-
+            float scaleX;
+            float scaleY;
+            
             matrix.reset();
-            defaultScale = MapImageView.DEFAULT_SCALE_FIT_INSIDE;
-            if(defaultScale == MapImageView.DEFAULT_SCALE_FIT_INSIDE) {               
-                if(imgWidth > containerWidth) {           
-                    scale = (float)containerWidth / imgWidth;           
-                    float newHeight = imgHeight * scale;           
-                    initY = (containerHeight - (int)newHeight)/2;
-
-                    matrix.setScale(scale, scale);
-                    matrix.postTranslate(0, initY);
-                }
-                else {           
-                    scale = (float)containerHeight / imgHeight;
-                    float newWidth = imgWidth * scale;
-                    initX = (containerWidth - (int)newWidth)/2;
-
-                    matrix.setScale(scale, scale);
-                    matrix.postTranslate(initX, 0);
-                }
-
-                curX = initX;
-                curY = initY;
-
-                currentScale = scale;
-                minScale = scale;
-            }
-            else {
-                if(imgWidth > containerWidth) {
-                    initX = 0;
-                    if(imgHeight > containerHeight) {                       
-                        initY = 0;
-                    }
-                    else {                       
-                        initY = (containerHeight - (int)imgHeight)/2;
-                    }
-
-                    matrix.postTranslate(0, initY);
-                }
-                else {                               
-                    initX = (containerWidth - (int)imgWidth)/2;
-                    if(imgHeight > containerHeight) {
-                        initY = 0;
-                    }
-                    else {
-                        initY = (containerHeight - (int)imgHeight)/2;
-                    }
-                    matrix.postTranslate(initX, 0);
-                }
-
-                curX = initX;
-                curY = initY;
-
-                currentScale = 1.0f;
-                minScale = 1.0f;               
-            }
-
+            scaleX = (float)containerWidth / imgWidth;
+            scaleY = (float)containerHeight / imgHeight;
+            matrix.setScale(scaleX, scaleY);
+            minScale = Math.max(scaleY, scaleX);
             invalidate();           
         }
         else {
