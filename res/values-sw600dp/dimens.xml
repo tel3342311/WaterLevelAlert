@@ -17,6 +17,7 @@
 	<dimen name="activity_alert_text_bottom_margin">30dp</dimen>
 	<dimen name="activity_alert_text_height">190dp</dimen>
 	<dimen name="activity_alert_text_size">32sp</dimen>
+	<dimen name="activity_alert_img_size">500dp</dimen>
 	<!--Data Reocrd activity  -->
 	<dimen name="activity_datarecord_listview_title_height">72dp</dimen>
 	<dimen name="activity_datarecord_text_size">20sp</dimen>

@@ -28,28 +28,28 @@
 	    android:layout_alignBottom="@id/map_bg">
 	   <ImageView
 	       	android:id="@+id/warning" 
-	   		android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
+	        android:layout_width="@dimen/activity_alert_img_size"
+	        android:layout_height="@dimen/activity_alert_img_size"
 	   		android:layout_gravity="center"
-	   		android:scaleType="center"
+	   		android:scaleType="centerInside"
 	   		android:background="@drawable/water0alert_img_floodwarning"
 	   		android:visibility="invisible"/>
 	   
 	   <ImageView 
 	        android:id="@+id/secondary_alert"
-	   		android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
+	        android:layout_width="@dimen/activity_alert_img_size"
+	        android:layout_height="@dimen/activity_alert_img_size"
 	   		android:layout_gravity="center"
-	   		android:scaleType="center"
+	   		android:scaleType="centerInside"
 	   		android:background="@drawable/water0alert_img_floodalert"
 	   		android:visibility="invisible"/>
 	   
 	   <ImageView 
 	       	android:id="@+id/thirdary_alert"
-	   		android:layout_width="wrap_content"
-	   		android:layout_height="wrap_content"
+	        android:layout_width="@dimen/activity_alert_img_size"
+	        android:layout_height="@dimen/activity_alert_img_size"
 	   		android:layout_gravity="center"
-	   		android:scaleType="center"
+	   		android:scaleType="centerInside"
 	   		android:background="@drawable/water0alert_img_severeflood"
 	   		android:visibility="invisible"/>
 	   
@@ -58,11 +58,11 @@
 
 	   <ImageView
 	       android:id="@+id/monitoring_alert"
-	       android:layout_width="wrap_content"
-	       android:layout_height="wrap_content"
+	       android:layout_width="@dimen/activity_alert_img_size"
+	       android:layout_height="@dimen/activity_alert_img_size"
 	       android:layout_gravity="center"
 	       android:background="@drawable/monitoring"
-	       android:scaleType="center"
+	       android:scaleType="centerInside"
 	       android:visibility="invisible" />
 
 	</FrameLayout>
