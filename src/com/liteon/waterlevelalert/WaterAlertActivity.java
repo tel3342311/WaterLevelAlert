@@ -41,6 +41,7 @@ public class WaterAlertActivity extends Activity {
 			mWarning.clearAnimation();
 			mSecondary.clearAnimation();
 			montioringAnimation.stop();
+			mMonitoring.setVisibility(View.INVISIBLE);
 			mThirdary.setVisibility(View.INVISIBLE);
 			if (level.equals(Def.WARNING_ALERT)) {
 				startAnimation(mWarning, warningAnimation);
@@ -52,7 +53,9 @@ public class WaterAlertActivity extends Activity {
 				mThirdary.setVisibility(View.VISIBLE);
 				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_third));
 			} else {
+				
 				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_mapgps));
+				mMonitoring.setVisibility(View.VISIBLE);
 				startAnimation(mMonitoring, montioringAnimation);
 			}
 		}
