@@ -5,23 +5,18 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.media.MediaPlayer.OnPreparedListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
-import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
@@ -96,7 +91,8 @@ public class VideoActivity extends Activity{
 		mVolume.setOnClickListener(mOnVolumeClickListener);
 		mBack.setOnClickListener(mOnBackClickListener);
 		mProgress.setOnSeekBarChangeListener(mOnSeekBarChangeListener);
-		mVideoView.setOnClickListener(mOnVideoViewClickListener);
+		//mVideoView.setOnClickListener(mOnVideoViewClickListener);
+		mVideoView.setOnTouchListener(mOnVideoViewTouchListener);
 	}
 	
 	private void setupVideoView() {
@@ -193,6 +189,16 @@ public class VideoActivity extends Activity{
 		
 	};
 	
+	private View.OnTouchListener mOnVideoViewTouchListener = new OnTouchListener() {
+		
+		@Override
+		public boolean onTouch(View v, MotionEvent event) {
+			if (mIsHideControl) {
+				showControl();
+			}
+			return true;
+		}
+	};
 	private View.OnClickListener mOnVideoViewClickListener = new View.OnClickListener() {
 		
 		@Override
