@@ -30,6 +30,7 @@ public class WaterAlertActivity extends Activity {
 	ImageView mBack;
 	Animation warningAnimation; 
 	Animation secondaryAnimation;
+	Animation thirdaryAnimation;
 	AnimationDrawable montioringAnimation;
 
 	BroadcastReceiver mBroadcastReceiver = new BroadcastReceiver() {
@@ -40,9 +41,9 @@ public class WaterAlertActivity extends Activity {
 			String level = intent.getStringExtra(Def.LEVEL);
 			mWarning.clearAnimation();
 			mSecondary.clearAnimation();
+			mThirdary.clearAnimation();
 			montioringAnimation.stop();
 			mMonitoring.setVisibility(View.INVISIBLE);
-			mThirdary.setVisibility(View.INVISIBLE);
 			if (level.equals(Def.WARNING_ALERT)) {
 				startAnimation(mWarning, warningAnimation);
 				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_warning));
@@ -50,10 +51,9 @@ public class WaterAlertActivity extends Activity {
 				startAnimation(mSecondary, secondaryAnimation);
 				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_secondary));
 			} else if (level.equals(Def.THIRDARY_ALERT)) {
-				mThirdary.setVisibility(View.VISIBLE);
+				startAnimation(mThirdary, thirdaryAnimation);
 				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_third));
 			} else {
-				
 				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_mapgps));
 				mMonitoring.setVisibility(View.VISIBLE);
 				startAnimation(mMonitoring, montioringAnimation);
@@ -118,6 +118,7 @@ public class WaterAlertActivity extends Activity {
 	private void setupAnimation(){
 		warningAnimation = AnimationUtils.loadAnimation(this, R.anim.warning_alert);
 		secondaryAnimation = AnimationUtils.loadAnimation(this, R.anim.secondary_alert);
+		thirdaryAnimation = AnimationUtils.loadAnimation(this, R.anim.thirdary_alert);
 		montioringAnimation = (AnimationDrawable) mMonitoring.getBackground();
 	}
 	

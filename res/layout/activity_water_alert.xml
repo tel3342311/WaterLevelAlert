@@ -32,7 +32,7 @@
 	        android:layout_height="@dimen/activity_alert_img_size"
 	   		android:layout_gravity="center"
 	   		android:scaleType="centerInside"
-	   		android:background="@drawable/water0alert_img_floodwarning"
+	   		android:background="@drawable/water0alert_img_severeflood"
 	   		android:visibility="invisible"/>
 	   
 	   <ImageView 
@@ -41,7 +41,7 @@
 	        android:layout_height="@dimen/activity_alert_img_size"
 	   		android:layout_gravity="center"
 	   		android:scaleType="centerInside"
-	   		android:background="@drawable/water0alert_img_floodalert"
+	   		android:background="@drawable/water0alert_img_floodwarning"
 	   		android:visibility="invisible"/>
 	   
 	   <ImageView 
@@ -50,7 +50,7 @@
 	        android:layout_height="@dimen/activity_alert_img_size"
 	   		android:layout_gravity="center"
 	   		android:scaleType="centerInside"
-	   		android:background="@drawable/water0alert_img_severeflood"
+	   		android:background="@drawable/water0alert_img_floodalert"
 	   		android:visibility="invisible"/>
 	   
 	   <!--FIXME: AndroidDrawable @drawable/monitoring cause OutOfMemory exception-->
