@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="activity_back_btn_margin_left">15dp</dimen>
+    <dimen name="activity_back_btn_size">80dp</dimen>
+    <!--Main activity  -->
+	<dimen name="activity_main_bottom_bar_height">125dp</dimen>
+	<dimen name="activity_main_bottom_logo_width">280dp</dimen>
+	<dimen name="activity_main_bottom_icon">93dp</dimen>
+	<dimen name="activity_main_bottom_icon_margin">20dp</dimen>
+	<dimen name="activity_title_bar_height">110dp</dimen>
+	<!--Alert activity  -->
+	<dimen name="activity_alert_bottom_height">240dp</dimen>
+	<dimen name="activity_alert_text_left_margin">252dp</dimen>
+	<dimen name="activity_alert_text_bottom_margin">40dp</dimen>
+	<dimen name="activity_alert_text_height">252dp</dimen>
+	<dimen name="activity_alert_text_size">42sp</dimen>
+	<dimen name="activity_alert_img_size">665dp</dimen>
+	<!--Data Reocrd activity  -->
+	<dimen name="activity_datarecord_listview_title_height">105dp</dimen>
+	<dimen name="activity_datarecord_text_size">26sp</dimen>
+	<!--Video activity  -->
+	<dimen name="activity_video_btn_margin">33dp</dimen>
+	<dimen name="activity_video_progressbar_height">18dp</dimen>
+	<dimen name="activity_video_bottom_bar_height">200dp</dimen>
+	<dimen name="activity_video_progress_text_size">32sp</dimen>
+	<dimen name="activity_video_icon_size">80dp</dimen>
+	<!--setting activity  -->
+	<dimen name="activity_setting_toggle_margin_right">66dp</dimen>
+	<dimen name="activity_setting_toggle_margin_top">370dp</dimen>
+	<dimen name="activity_setting_toggle_width">133dp</dimen>
+	<dimen name="activity_setting_toggle_height">53dp</dimen>
+	<dimen name="activity_setting_skip_btn_height">100dp</dimen>
+	<!--Login activity  -->
+	<dimen name="activity_login_edittext_height">85dp</dimen>	
+	<dimen name="activity_login_edittext_size">40sp</dimen>
+	<dimen name="activity_login_edittext_icon_size">40dp</dimen>
+	<dimen name="activity_login_edittext_margin">33dp</dimen>
+	<dimen name="activity_login_checkbox_margin_left">26dp</dimen>
+	<dimen name="activity_login_checkbox_margin_top">40dp</dimen>
+	<dimen name="activity_login_checkbox_margin_size">46dp</dimen>
+	<dimen name="activity_login_login_btn_height">100dp</dimen>	
+</resources>
