@@ -2,14 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/main_gnd_mapgps"
     tools:context="com.liteon.waterlevelalert.MainActivity" >
 
-	<ImageView 
-	   android:layout_width="match_parent"
-	   android:layout_height="match_parent"
-	   android:background="@drawable/main_gnd_mapgps"/>
-	
+
 	<LinearLayout 
+	    android:id="@+id/bottom_bar"
 	    android:orientation="horizontal"
 	    android:layout_width="match_parent"
 	    android:layout_height="@dimen/activity_main_bottom_bar_height"
@@ -62,5 +60,13 @@
 			   	android:layout_margin="@dimen/activity_main_bottom_icon_margin"/>/>
 		</LinearLayout>  
 	  </LinearLayout>  
-
+	  
+	  <com.liteon.waterlevelalert.util.MapImageView 
+	    android:id="@+id/map_bg"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_above="@id/bottom_bar"
+	    android:src="@drawable/water0alert_gnd_mapgps"
+	    android:clickable="true"
+	    android:background="#FF000000"/>	
 </RelativeLayout>

@@ -1,9 +1,16 @@
 package com.liteon.waterlevelalert;
 
+import java.io.InputStream;
+
 import com.liteon.waterlevelalert.service.AlertDataService;
+import com.liteon.waterlevelalert.util.MapImageView;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,11 +19,11 @@ import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 	
-	private ImageView mMainView;
 	private ImageView mWaterAlertView;
 	private ImageView mVideoView;
 	private ImageView mDataRecordView;
 	private ImageView mSettingView;
+	private MapImageView mMap;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +32,12 @@ public class MainActivity extends Activity {
 		findViews();
 		setListener();
 		startAlertService();
+		new LoadBitmapTask().execute();
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();		
 	}
 	
 	@Override
@@ -43,6 +56,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void findViews() {
+		mMap = (MapImageView) findViewById(R.id.map_bg);
 		mWaterAlertView = (ImageView) findViewById(R.id.alert_btn);
 		mVideoView = (ImageView) findViewById(R.id.video_btn);
 		mDataRecordView = (ImageView) findViewById(R.id.data_btn);
@@ -89,5 +103,32 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(MainActivity.this,
                 AlertDataService.class);
         stopService(intent);
+	}
+	
+	public Bitmap getLocalBitmap(Context con, int resourceId){
+	    InputStream inputStream = con.getResources().openRawResource(resourceId);
+	    return BitmapFactory.decodeStream(inputStream, null, getBitmapOptions(1));
+	}
+	
+	private BitmapFactory.Options getBitmapOptions(int scale){
+	    BitmapFactory.Options options = new BitmapFactory.Options();
+	    options.inPurgeable = true;
+	    options.inInputShareable = true;
+	    options.inSampleSize = scale;
+	    return options;
+	}
+	
+	private class LoadBitmapTask extends AsyncTask<Void, Integer, Bitmap> {
+
+		@Override
+		protected Bitmap doInBackground(Void... params) {
+			return getLocalBitmap(MainActivity.this, R.drawable.water0alert_gnd_mapgps);
+		}
+		
+		@Override
+		protected void onPostExecute(Bitmap result) {			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			mMap.setImageBitmap(result);
+		}
 	}
 }
