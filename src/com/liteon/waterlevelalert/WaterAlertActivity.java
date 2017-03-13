@@ -26,7 +26,7 @@ public class WaterAlertActivity extends Activity {
 	ImageView mWarning;
 	ImageView mSecondary;
 	ImageView mThirdary;
-	MapImageView mMap;
+	ImageView mMap;
 	ImageView mBack;
 	Animation warningAnimation; 
 	Animation secondaryAnimation;
@@ -46,15 +46,15 @@ public class WaterAlertActivity extends Activity {
 			mMonitoring.setVisibility(View.INVISIBLE);
 			if (level.equals(Def.WARNING_ALERT)) {
 				startAnimation(mWarning, warningAnimation);
-				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_warning));
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_warning);
 			} else if (level.equals(Def.SECONDARY_ALERT)) {
 				startAnimation(mSecondary, secondaryAnimation);
-				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_secondary));
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_secondary);
 			} else if (level.equals(Def.THIRDARY_ALERT)) {
 				startAnimation(mThirdary, thirdaryAnimation);
-				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_third));
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_third);
 			} else {
-				mMap.setImageBitmap(getLocalBitmap(WaterAlertActivity.this, R.drawable.water0alert_gnd_mapgps));
+				mMap.setBackgroundResource(R.drawable.water0alert_gnd_mapgps);
 				mMonitoring.setVisibility(View.VISIBLE);
 				startAnimation(mMonitoring, montioringAnimation);
 			}
@@ -75,7 +75,7 @@ public class WaterAlertActivity extends Activity {
 		mWarning = (ImageView) findViewById(R.id.warning);
 		mSecondary = (ImageView) findViewById(R.id.secondary_alert);
 		mThirdary = (ImageView) findViewById(R.id.thirdary_alert);
-		mMap = (MapImageView) findViewById(R.id.map_bg);
+		mMap = (ImageView) findViewById(R.id.map_bg);
 		mMonitoring = (ImageView) findViewById(R.id.monitoring_alert);
 		mBack = (ImageView) findViewById(R.id.back_btn);
 	}
@@ -138,6 +138,5 @@ public class WaterAlertActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		mMap.setImageBitmap(getLocalBitmap(this, R.drawable.water0alert_gnd_mapgps));
 	}
 }
